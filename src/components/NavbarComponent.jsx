@@ -10,4 +10,4 @@ pacientes y turnos. El resto de opciones necesarias se deja a criterio del equip
   )
 }
 
-export default NavbarComponent
+export default NavbarComponent;
