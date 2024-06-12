@@ -10,7 +10,17 @@ const PatientPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPetsModal, setShowPetsModal] = useState(false);
-  const [formValues, setFormValues] = useState({
+  const [addFormValues, setAddFormValues] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    dni: '',
+    phone: '',
+    password: '',
+    isAdmin: false
+  });
+  const [editFormValues, setEditFormValues] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -42,12 +52,12 @@ const PatientPage = () => {
       const response = await fetch(`${DATABASE_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(addFormValues)
       });
       if (response.ok) {
         getUsers();
         setShowAddModal(false);
-        setFormValues({ ...formValues, isAdmin: false });
+        setAddFormValues({ ...addFormValues, isAdmin: false });
       } else {
         console.error("Error adding user");
       }
@@ -61,12 +71,12 @@ const PatientPage = () => {
       const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(editFormValues)
       });
       if (response.ok) {
         getUsers();
         setShowEditModal(false);
-        setFormValues({ ...formValues, isAdmin: false });
+        setEditFormValues({ ...editFormValues, isAdmin: false });
       } else {
         console.error("Error editing user");
       }
@@ -89,9 +99,14 @@ const PatientPage = () => {
     }
   };
 
-  const handleFormChange = (event) => {
+  const handleFormChange = (event, setFormValues) => {
     const { name, value, type, checked } = event.target;
-    setFormValues({ ...formValues, [name]: type === 'checkbox' ? checked : value });
+    setFormValues(prevValues => ({ ...prevValues, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const handleShowPetsModal = (user) => {
+    setSelectedUser(user);
+    setShowPetsModal(true);
   };
 
   return (
@@ -115,7 +130,7 @@ const PatientPage = () => {
                   {user.firstName} {user.lastName}
                 </div>
                 <div>
-                  <Button variant="info" size="sm" onClick={() => setShowPetsModal(true)}>Mascotas</Button> {/* Abre el modal de mascotas */}
+                  <Button variant="info" size="sm" onClick={() => handleShowPetsModal(user)}>Mascotas</Button> {/* Abre el modal de mascotas */}
                 </div>
               </ListGroup.Item>
             ))}
@@ -134,7 +149,7 @@ const PatientPage = () => {
                   <strong>Admin:</strong> {selectedUser.isAdmin ? 'Yes' : 'No'}
                 </Card.Text>
                 <div className="d-flex justify-content-end">
-                  <Button variant="warning" size="sm" onClick={() => { setSelectedUser(selectedUser); setFormValues(selectedUser); setShowEditModal(true); }} className="ms-2">Editar</Button>
+                  <Button variant="warning" size="sm" onClick={() => { setEditFormValues(selectedUser); setShowEditModal(true); }} className="ms-2">Editar</Button>
                   <Button variant="danger" size="sm" onClick={() => handleDeleteUser(selectedUser._id)} className="ms-2">Eliminar</Button>
                 </div>
               </Card.Body>
@@ -152,34 +167,34 @@ const PatientPage = () => {
           <Form>
             <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="firstName" value={formValues.firstName} onChange={handleFormChange} />
+              <Form.Control type="text" name="firstName" value={addFormValues.firstName} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Apellido</Form.Label>
-              <Form.Control type="text" name="lastName" value={formValues.lastName} onChange={handleFormChange} />
+              <Form.Control type="text" name="lastName" value={addFormValues.lastName} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" name="email" value={formValues.email} onChange={handleFormChange} />
+              <Form.Control type="email" name="email" value={addFormValues.email} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Direccion</Form.Label>
-              <Form.Control type="text" name="address" value={formValues.address} onChange={handleFormChange} />
+              <Form.Control type="text" name="address" value={addFormValues.address} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>DNI</Form.Label>
-              <Form.Control type="text" name="dni" value={formValues.dni} onChange={handleFormChange} />
+              <Form.Control type="text" name="dni" value={addFormValues.dni} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Telefono</Form.Label>
-              <Form.Control type="text" name="phone" value={formValues.phone} onChange={handleFormChange} />
+              <Form.Control type="text" name="phone" value={addFormValues.phone} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" name="password" value={formValues.password} onChange={handleFormChange} />
+              <Form.Control type="password" name="password" value={addFormValues.password} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Form.Group>
-              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={formValues.isAdmin} onChange={handleFormChange} />
+              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={addFormValues.isAdmin} onChange={(e) => handleFormChange(e, setAddFormValues)} />
             </Form.Group>
             <Button variant="primary" onClick={handleAddUser}>Agregar</Button>
           </Form>
@@ -195,46 +210,47 @@ const PatientPage = () => {
           <Form>
             <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="firstName" value={formValues.firstName} onChange={handleFormChange} />
+              <Form.Control type="text" name="firstName" value={editFormValues.firstName} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Apellido</Form.Label>
-              <Form.Control type="text" name="lastName" value={formValues.lastName} onChange={handleFormChange} />
+              <Form.Control type="text" name="lastName" value={editFormValues.lastName} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" name="email" value={formValues.email} onChange={handleFormChange} />
+              <Form.Control type="email" name="email" value={editFormValues.email} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Direccion</Form.Label>
-              <Form.Control type="text" name="address" value={formValues.address} onChange={handleFormChange} />
+              <Form.Control type="text" name="address" value={editFormValues.address} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>DNI</Form.Label>
-              <Form.Control type="text" name="dni" value={formValues.dni} onChange={handleFormChange} />
+              <Form.Control type="text" name="dni" value={editFormValues.dni} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Telefono</Form.Label>
-              <Form.Control type="text" name="phone" value={formValues.phone} onChange={handleFormChange} />
+              <Form.Control type="text" name="phone" value={editFormValues.phone} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" name="password" value={formValues.password} onChange={handleFormChange} />
+              <Form.Control type="password" name="password" value={editFormValues.password} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Form.Group>
-              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={formValues.isAdmin} onChange={handleFormChange} />
+              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={editFormValues.isAdmin} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
             <Button variant="primary" onClick={handleEditUser}>Guardar Cambios</Button>
           </Form>
         </Modal.Body>
       </Modal>
+
       {/* Modal para mostrar las mascotas */}
       <Modal show={showPetsModal} onHide={() => setShowPetsModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Mascotas de {selectedUser.firstName} {selectedUser.lastName}</Modal.Title>
+          <Modal.Title>Mascotas de {selectedUser?.firstName} {selectedUser?.lastName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {selectedUser && <PetUsersComponent userId={selectedUser._id} />}
+          {selectedUser && <PetUsersComponent userId={selectedUser._id} />}
         </Modal.Body>
       </Modal>
     </Container>
