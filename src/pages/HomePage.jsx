@@ -1,12 +1,6 @@
-import { Button } from 'bootstrap';
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+
 
 const HomePage = () => {
-  const navigate = useNavigate();
-  const handleClick = ()=>{
-    navigate('/patientPage');
-  }
   
   return (
     <>
@@ -28,9 +22,6 @@ const HomePage = () => {
     alguna API de confianza del grupo de desarrolladores. Si los desarrolladores lo consideran necesario,
     pueden mostrar algunos de los datos estáticos mencionados anteriormente en otras páginas del sitio por
     cuestiones de diseño. 
-   </div>
-   <div>
-    <button onClick={handleClick}>pagina de pacientes</button>
    </div>
     </>
   )

@@ -11,6 +11,7 @@ const PetUsersComponent = ({ userId }) => {
   const [formValues, setFormValues] = useState({
     name: '',
     type: '',
+    race: '',
     age: '',
   });
 
@@ -68,12 +69,15 @@ const PetUsersComponent = ({ userId }) => {
       const updatedPet = await response.json();
       setUserPets(userPets.map(pet => (pet._id === updatedPet._id ? updatedPet : pet)));
       setShowEditModal(false);
-      setSelectedPet(null);
-      setFormValues({ name: '', type: '', age: '' });
+      if (selectedPet) {
+        setSelectedPet(null);
+        setFormValues({ name: '', type: '', age: '', race:'' });
+      }
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   const handleDeletePet = async (petId) => {
     try {
@@ -91,7 +95,7 @@ const PetUsersComponent = ({ userId }) => {
 
   const openEditModal = (pet) => {
     setSelectedPet(pet);
-    setFormValues({ name: pet.name, type: pet.type, age: pet.age });
+    setFormValues({ name: pet.name, type: pet.type, race: pet.race, age: pet.age });
     setShowEditModal(true);
   };
 
@@ -103,6 +107,7 @@ const PetUsersComponent = ({ userId }) => {
           <ListGroup.Item className='' key={pet._id}>
             <strong>Nombre:</strong> {pet.name}<br />
             <strong>Tipo:</strong> {pet.type}<br />
+            <strong>Raza:</strong> {pet.race}<br />
             <strong>Edad:</strong> {pet.age}
             <div className=' d-flex justify-content-end'>
               <Button variant="warning" size='sm' onClick={() => openEditModal(pet)} className=' ms-2'>Editar</Button>
@@ -128,6 +133,10 @@ const PetUsersComponent = ({ userId }) => {
               <Form.Control type="text" name="type" value={formValues.type} onChange={handleFormChange} />
             </Form.Group>
             <Form.Group>
+              <Form.Label>Raza</Form.Label>
+              <Form.Control type="text" name="race" value={formValues.race} onChange={handleFormChange} />
+            </Form.Group>
+            <Form.Group>
               <Form.Label>Edad</Form.Label>
               <Form.Control type="number" name="age" value={formValues.age} onChange={handleFormChange} />
             </Form.Group>
@@ -150,6 +159,10 @@ const PetUsersComponent = ({ userId }) => {
             <Form.Group>
               <Form.Label>Tipo</Form.Label>
               <Form.Control type="text" name="type" value={formValues.type} onChange={handleFormChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Raza</Form.Label>
+              <Form.Control type="text" name="race" value={formValues.race} onChange={handleFormChange} />
             </Form.Group>
             <Form.Group>
               <Form.Label>Edad</Form.Label>

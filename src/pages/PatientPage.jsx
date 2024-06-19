@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, ListGroup, Card, Button, Modal, Form } from 'react-bootstrap';
-import PetUsersComponent from '../components/PetUsersComponent'; // Importa el componente de mascotas
+import PetUsersComponent from '../components/PetUsersComponent';
 
 const DATABASE_URL = 'http://localhost:4500';
 
@@ -34,19 +34,19 @@ const PatientPage = () => {
   useEffect(() => {
     getUsers();
   }, []);
-
+//traer lista de ususarios
   const getUsers = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`);
       const data = await response.json();
       setUsers(data);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error al recuperar el usuario:", error);
     }
   };
 
   const handleUserClick = (user) => setSelectedUser(user);
-
+//agregar usuarios
   const handleAddUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`, {
@@ -57,15 +57,24 @@ const PatientPage = () => {
       if (response.ok) {
         getUsers();
         setShowAddModal(false);
-        setAddFormValues({ ...addFormValues, isAdmin: false });
+        setAddFormValues({
+          firstName: '',
+          lastName: '',
+          email: '',
+          address: '',
+          dni: '',
+          phone: '',
+          password: '',
+          isAdmin: false
+        });
       } else {
-        console.error("Error adding user");
+        console.error("Error al agregar usuario");
       }
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error("Error al agregar usuario:", error);
     }
   };
-
+//editar ususarios
   const handleEditUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
@@ -76,15 +85,24 @@ const PatientPage = () => {
       if (response.ok) {
         getUsers();
         setShowEditModal(false);
-        setEditFormValues({ ...editFormValues, isAdmin: false });
+        setEditFormValues({
+          firstName: '',
+          lastName: '',
+          email: '',
+          address: '',
+          dni: '',
+          phone: '',
+          password: '',
+          isAdmin: false
+        });
       } else {
-        console.error("Error editing user");
+        console.error("Error al editar usuario");
       }
     } catch (error) {
-      console.error("Error editing user:", error);
+      console.error("Error al editar usuario:", error);
     }
   };
-
+//eliminar usuarios
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${userId}`, { method: 'DELETE' });
@@ -92,10 +110,10 @@ const PatientPage = () => {
         getUsers();
         setSelectedUser(null);
       } else {
-        console.error("Error deleting user");
+        console.error("Error al eliminar usuario:", error);
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error al eliminar usuario:", error);
     }
   };
 
@@ -130,7 +148,7 @@ const PatientPage = () => {
                   {user.firstName} {user.lastName}
                 </div>
                 <div>
-                  <Button variant="info" size="sm" onClick={() => handleShowPetsModal(user)}>Mascotas</Button> {/* Abre el modal de mascotas */}
+                  <Button variant="info" size="sm" onClick={() => handleShowPetsModal(user)}>Mascotas</Button>
                 </div>
               </ListGroup.Item>
             ))}
@@ -146,7 +164,7 @@ const PatientPage = () => {
                   <strong>Address:</strong> {selectedUser.address}<br />
                   <strong>DNI:</strong> {selectedUser.dni}<br />
                   <strong>Phone:</strong> {selectedUser.phone}<br />
-                  <strong>Admin:</strong> {selectedUser.isAdmin ? 'Yes' : 'No'}
+                  <strong>Admin:</strong> {selectedUser.isAdmin ? 'Si' : 'No'}
                 </Card.Text>
                 <div className="d-flex justify-content-end">
                   <Button variant="warning" size="sm" onClick={() => { setEditFormValues(selectedUser); setShowEditModal(true); }} className="ms-2">Editar</Button>

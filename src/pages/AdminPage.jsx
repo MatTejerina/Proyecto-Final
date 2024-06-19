@@ -12,6 +12,6 @@ Al ingresar como usuario administrador, se habilitarán nuevas opciones en el me
  Administrar turnos: la cual nos llevara a una página para trabajar un CRUD de turnos
     </div>
   )
-}
+};
 
-export default AdminPage
+export default AdminPage;
