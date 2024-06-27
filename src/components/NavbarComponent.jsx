@@ -1,13 +1,21 @@
-import React from 'react'
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const NavbarComponent = () => {
   return (
-    <div>NavbarComponent
-      El navbar debe mostrar el logo de la empresa, el botón de login para los usuarios con los permisos
-suficientes, solo en el caso de ser administradores además se deberá mostrar las opciones para administrar
-pacientes y turnos. El resto de opciones necesarias se deja a criterio del equipo de desarrolladores.
-    </div>
-  )
+    <AppBar position="static">
+      <Toolbar>
+        <Button color="inherit" component={Link} to="/">Inicio de sesion</Button>
+        <Typography variant="h6" style={{ flexGrow: 1 }} className=' text-center'>
+          Administración
+        </Typography>
+        <Button color="inherit" component={Link} to="/">Inicio</Button>
+        <Button color="inherit" component={Link} to="/patientPage">Administrar Pacientes</Button>
+        <Button color="inherit" component={Link} to="/appointmentPage">Administrar Turnos</Button>
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default NavbarComponent
+export default NavbarComponent;

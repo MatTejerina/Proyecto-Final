@@ -1,7 +1,9 @@
-import React from 'react'
+
 
 const HomePage = () => {
+  
   return (
+    <>
     <div>PAGINA PRINCIPAL
     La página principal debe contener información destacada de la veterinaria, servicios que ofrece, algunos
     productos que pueden ser adquiridos en la veterinaria, publicidad de marcas con las que trabajamos,
@@ -19,7 +21,9 @@ const HomePage = () => {
     NOTA: la información del clima, se modifica constantemente por lo que queremos tomar estos datos de
     alguna API de confianza del grupo de desarrolladores. Si los desarrolladores lo consideran necesario,
     pueden mostrar algunos de los datos estáticos mencionados anteriormente en otras páginas del sitio por
-    cuestiones de diseño. </div>
+    cuestiones de diseño. 
+   </div>
+    </>
   )
 }
 
