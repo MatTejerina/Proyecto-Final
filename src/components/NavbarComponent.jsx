@@ -16,15 +16,7 @@ const NavbarComponent = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    localStorage.clear();
-    setUser({
-      token: null,
-      userInfo: null,
-      logged: false,
-      isAdmin: false
-    })
-    navigate('/login');
-    enqueueSnackbar('Se deslogueo con exito', { variant: 'success' })
+
   }
 
   return (
