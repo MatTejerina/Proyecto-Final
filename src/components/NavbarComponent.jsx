@@ -12,7 +12,7 @@ const NavbarComponent = () => {
         </Typography>
         <Button color="inherit" component={Link} to="/">Inicio</Button>
         <Button color="inherit" component={Link} to="/patientPage">Administrar Pacientes</Button>
-        <Button color="inherit" component={Link} to="/turnPage">Administrar Turnos</Button>
+        <Button color="inherit" component={Link} to="/appointmentPage">Administrar Turnos</Button>
       </Toolbar>
     </AppBar>
   );

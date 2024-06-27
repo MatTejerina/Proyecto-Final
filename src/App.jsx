@@ -23,7 +23,7 @@ function App() {
         <Route path="errorPage" element= {<ErrorPage/>}/>
         <Route path="plansPage" element= {<PlansPage/>}/>
         <Route path="registerPage" element= {<RegisterPage/>}/>
-        <Route path="appointmentPage" element={<AppointmentsPage/>}/>
+        <Route path="/appointmentPage" element={<AppointmentsPage/>}/>
       </Routes>      
     </>
   )

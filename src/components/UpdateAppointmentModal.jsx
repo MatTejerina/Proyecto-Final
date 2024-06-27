@@ -18,7 +18,7 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
 
   const fetchAvailableTimeSlots = async (vetId, selectedDate) => {
     try {
-      const response = await axios.get(`/appointments/${vetId}/${selectedDate}`);
+      const response = await axios.get(`http://localhost:5000/appointments/${vetId}/${selectedDate}`);
       const appointments = response.data;
       const occupiedTimeSlots = appointments.map(appointment => appointment.timeSlot);
       setAvailableTimeSlots(getAvailableTimeSlots(occupiedTimeSlots));
@@ -52,7 +52,7 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
     const formattedDate = formatDateForServer(date);
   
     try {
-      const response = await fetch(`/appointments/${appointment._id}`, {
+      const response = await fetch(`http://localhost:5000/appointments/${appointment._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

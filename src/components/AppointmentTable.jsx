@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import axios from 'axios';
-import UpdateAppointmentModal from './UpdateAppointmentModal'; // Importa el nuevo modal combinado
+import UpdateAppointmentModal from './UpdateAppointmentModal';
 
 function AppointmentTable({ appointmentsUpdated }) {
   const [appointments, setAppointments] = useState([]);
-  const [showUpdateModal, setShowUpdateModal] = useState(false); // Estado para controlar el modal combinado
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
-  const fetchAppointments = () => {
-    axios.get('/appointments').then((response) => {
-      setAppointments(response.data);
-    });
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/appointments');
+      const data = await response.json();
+      setAppointments(data);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
   };
 
   useEffect(() => {
@@ -24,10 +27,15 @@ function AppointmentTable({ appointmentsUpdated }) {
     }
   }, [appointmentsUpdated]);
 
-  const handleDeleteAppointment = (appointmentId) => {
-    axios.delete(`/appointments/${appointmentId}`).then(() => {
+  const handleDeleteAppointment = async (appointmentId) => {
+    try {
+      await fetch(`http://localhost:5000/appointments/${appointmentId}`, {
+        method: 'DELETE',
+      });
       fetchAppointments();
-    });
+    } catch (error) {
+      console.error('Error deleting appointment:', error);
+    }
   };
 
   const handleShowUpdateModal = (appointment) => {
@@ -53,7 +61,7 @@ function AppointmentTable({ appointmentsUpdated }) {
       <tr key={appointment._id}>
         <td>{appointment._id}</td>
         <td>{appointment.pet ? appointment.pet.name : 'Unknown'}</td>
-        <td>{appointment.pet && appointment.pet.owner ? appointment.pet.owner.name : 'Unknown'}</td>
+        <td>{appointment.pet && appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
         <td>{appointment.veterinarian ? appointment.veterinarian.name : 'Unknown'}</td>
         <td onClick={() => handleShowUpdateModal(appointment)}>{appointment.date}</td>
         <td onClick={() => handleShowUpdateModal(appointment)}>{appointment.timeSlot}</td>
@@ -62,7 +70,6 @@ function AppointmentTable({ appointmentsUpdated }) {
         </td>
       </tr>
     ));
-    
   };
 
   return (
@@ -84,7 +91,6 @@ function AppointmentTable({ appointmentsUpdated }) {
         </tbody>
       </Table>
 
-      {/* Modal combinado */}
       <UpdateAppointmentModal
         show={showUpdateModal}
         handleClose={() => setShowUpdateModal(false)}
@@ -96,5 +102,3 @@ function AppointmentTable({ appointmentsUpdated }) {
 }
 
 export default AppointmentTable;
-
-

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import axios from 'axios';
 
 function AppointmentFormModal({ show, handleClose, onSave }) {
   const [veterinarians, setVeterinarians] = useState([]);
@@ -14,24 +13,27 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
   useEffect(() => {
-    axios.get('/veterinarians').then((response) => {
-      setVeterinarians(response.data);
-    });
+    fetch('http://localhost:5000/veterinarians')
+      .then(response => response.json())
+      .then(data => setVeterinarians(data))
+      .catch(error => console.error('Error fetching veterinarians:', error));
   }, []);
 
   useEffect(() => {
     if (selectedVet) {
-      axios.get(`/users`).then((response) => {
-        setOwners(response.data);
-      });
+      fetch(`http://localhost:5000/users`)
+        .then(response => response.json())
+        .then(data => setOwners(data))
+        .catch(error => console.error('Error fetching owners:', error));
     }
   }, [selectedVet]);
 
   useEffect(() => {
     if (selectedOwner) {
-      axios.get(`/pets/${selectedOwner}`).then((response) => {
-        setPets(response.data);
-      });
+      fetch(`http://localhost:5000/pets/${selectedOwner}`)
+        .then(response => response.json())
+        .then(data => setPets(data))
+        .catch(error => console.error('Error fetching pets:', error));
     }
   }, [selectedOwner]);
 
@@ -41,8 +43,8 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
 
     if (selectedVet && selectedDate) {
       try {
-        const response = await axios.get(`/appointments/${selectedVet}/${selectedDate}`);
-        const appointments = response.data;
+        const response = await fetch(`http://localhost:5000/appointments/${selectedVet}/${selectedDate}`);
+        const appointments = await response.json();
         const occupiedTimeSlots = appointments.map(appointment => appointment.timeSlot);
         setAvailableTimeSlots(getAvailableTimeSlots(occupiedTimeSlots));
       } catch (error) {
@@ -67,7 +69,7 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
   };
 
   const handleSave = () => {
-    const formattedDate = formatDateForServer(date); // Formatear la fecha antes de enviarla al servidor
+    const formattedDate = formatDateForServer(date);
   
     const appointmentData = {
       pet: selectedPet,
@@ -78,11 +80,18 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
   
     console.log('Sending appointment data:', appointmentData);
   
-    axios.post('/appointments', appointmentData)
-      .then((response) => {
-        console.log('Appointment created:', response.data);
-        onSave(); // Actualiza la lista de turnos después de crear uno nuevo
-        handleCloseModal(); // Cierra el modal o realiza otras acciones necesarias
+    fetch('http://localhost:5000/appointments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appointmentData),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log('Appointment created:', data);
+        onSave();
+        handleCloseModal();
       })
       .catch((error) => {
         console.error('Error creating appointment:', error);
@@ -94,7 +103,7 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
     if (!dateString) return null;
   
     const [year, month, day] = dateString.split('-');
-    return `${year}-${month}-${day}T00:00:00.000Z`; // Formato ISO 8601 para asegurar consistencia
+    return `${year}-${month}-${day}T00:00:00.000Z`;
   };
 
   const resetForm = () => {
@@ -151,7 +160,7 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
               <option value="">Seleccionar</option>
               {owners.map((owner) => (
                 <option key={owner._id} value={owner._id}>
-                  {owner.name}
+                  {owner.firstName} {owner.lastName}
                 </option>
               ))}
             </Form.Control>
