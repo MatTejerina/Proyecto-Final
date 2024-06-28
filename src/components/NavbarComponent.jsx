@@ -16,7 +16,15 @@ const NavbarComponent = ({ user, setUser }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-
+    localStorage.clear();
+    setUser({
+      token: null,
+      userInfo: null,
+      logged: false,
+      isAdmin: false
+    })
+    navigate('/login');
+    enqueueSnackbar('Se cerro la sesion', { variant: 'success' })
   }
 
   return (
