@@ -28,25 +28,23 @@ const AppointmentFormModal = ({ show, handleClose, onSave }) => {
   }, []);
 
   useEffect(() => {
-    if (selectedVet) {
-      const fetchOwners = async () => {
-        try {
-          const response = await fetch(`${DATABASE_URL}/users`);
-          const data = await response.json();
-          setOwners(data);
-        } catch (error) {
-          console.error('Error fetching owners:', error);
-        }
-      };
-      fetchOwners();
-    }
-  }, [selectedVet]);
+    const fetchOwners = async () => {
+      try {
+        const response = await fetch(`${DATABASE_URL}/users`);
+        const data = await response.json();
+        setOwners(data);
+      } catch (error) {
+        console.error('Error fetching owners:', error);
+      }
+    };
+    fetchOwners();
+  }, []);
 
   useEffect(() => {
     if (selectedOwner) {
       const fetchPets = async () => {
         try {
-          const response = await fetch(`${DATABASE_URL}/pets/${selectedOwner}`);
+          const response = await fetch(`${DATABASE_URL}/pets/owner/${selectedOwner}`);
           const data = await response.json();
           setPets(data);
         } catch (error) {
@@ -194,8 +192,8 @@ const AppointmentFormModal = ({ show, handleClose, onSave }) => {
             >
               <option value="">Seleccionar</option>
               {pets.map((pet) => (
-                <option key={pet._id} value={pet._id} disabled={pet.appointment}>
-                  {pet.name} {pet.appointment && '(Ya tiene turno)'}
+                <option key={pet._id} value={pet._id}>
+                  {pet.name}
                 </option>
               ))}
             </Form.Control>

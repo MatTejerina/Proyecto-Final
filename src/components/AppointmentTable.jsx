@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import UpdateAppointmentModal from './UpdateAppointmentModal';
 
+const DATABASE_URL = 'http://localhost:4500';
+
 function AppointmentTable({ appointmentsUpdated }) {
   const [appointments, setAppointments] = useState([]);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -9,7 +11,7 @@ function AppointmentTable({ appointmentsUpdated }) {
 
   const fetchAppointments = async () => {
     try {
-      const response = await fetch('http://localhost:5000/appointments');
+      const response = await fetch(`${DATABASE_URL}/appointments`);
       const data = await response.json();
       setAppointments(data);
     } catch (error) {
@@ -29,7 +31,7 @@ function AppointmentTable({ appointmentsUpdated }) {
 
   const handleDeleteAppointment = async (appointmentId) => {
     try {
-      await fetch(`http://localhost:5000/appointments/${appointmentId}`, {
+      await fetch(`${DATABASE_URL}/appointments/${appointmentId}`, {
         method: 'DELETE',
       });
       fetchAppointments();
@@ -59,9 +61,9 @@ function AppointmentTable({ appointmentsUpdated }) {
 
     return appointments.map((appointment) => (
       <tr key={appointment._id}>
-        <td>{appointment._id}</td>
+        <td>{appointment.pet.owner ? appointment.pet.owner.dni : 'Unknown'}</td>
+        <td>{appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
         <td>{appointment.pet ? appointment.pet.name : 'Unknown'}</td>
-        <td>{appointment.pet && appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
         <td>{appointment.veterinarian ? appointment.veterinarian.name : 'Unknown'}</td>
         <td onClick={() => handleShowUpdateModal(appointment)}>{appointment.date}</td>
         <td onClick={() => handleShowUpdateModal(appointment)}>{appointment.timeSlot}</td>
@@ -77,9 +79,9 @@ function AppointmentTable({ appointmentsUpdated }) {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Mascota</th>
+            <th>DNI</th>
             <th>Dueño</th>
+            <th>Mascota</th>
             <th>Veterinario</th>
             <th>Fecha</th>
             <th>Horario</th>
