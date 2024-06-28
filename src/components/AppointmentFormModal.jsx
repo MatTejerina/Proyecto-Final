@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-function AppointmentFormModal({ show, handleClose, onSave }) {
+const DATABASE_URL = 'http://localhost:4500';
+
+const AppointmentFormModal = ({ show, handleClose, onSave }) => {
   const [veterinarians, setVeterinarians] = useState([]);
   const [owners, setOwners] = useState([]);
   const [pets, setPets] = useState([]);
@@ -13,27 +15,45 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/veterinarians')
-      .then(response => response.json())
-      .then(data => setVeterinarians(data))
-      .catch(error => console.error('Error fetching veterinarians:', error));
+    const fetchData = async () => {
+      try {
+        const vetsResponse = await fetch(`${DATABASE_URL}/veterinarians`);
+        const vetsData = await vetsResponse.json();
+        setVeterinarians(vetsData);
+      } catch (error) {
+        console.error('Error fetching veterinarians:', error);
+      }
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
     if (selectedVet) {
-      fetch(`http://localhost:5000/users`)
-        .then(response => response.json())
-        .then(data => setOwners(data))
-        .catch(error => console.error('Error fetching owners:', error));
+      const fetchOwners = async () => {
+        try {
+          const response = await fetch(`${DATABASE_URL}/users`);
+          const data = await response.json();
+          setOwners(data);
+        } catch (error) {
+          console.error('Error fetching owners:', error);
+        }
+      };
+      fetchOwners();
     }
   }, [selectedVet]);
 
   useEffect(() => {
     if (selectedOwner) {
-      fetch(`http://localhost:5000/pets/${selectedOwner}`)
-        .then(response => response.json())
-        .then(data => setPets(data))
-        .catch(error => console.error('Error fetching pets:', error));
+      const fetchPets = async () => {
+        try {
+          const response = await fetch(`${DATABASE_URL}/pets/${selectedOwner}`);
+          const data = await response.json();
+          setPets(data);
+        } catch (error) {
+          console.error('Error fetching pets:', error);
+        }
+      };
+      fetchPets();
     }
   }, [selectedOwner]);
 
@@ -43,7 +63,7 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
 
     if (selectedVet && selectedDate) {
       try {
-        const response = await fetch(`http://localhost:5000/appointments/${selectedVet}/${selectedDate}`);
+        const response = await fetch(`${DATABASE_URL}/appointments/${selectedVet}/${selectedDate}`);
         const appointments = await response.json();
         const occupiedTimeSlots = appointments.map(appointment => appointment.timeSlot);
         setAvailableTimeSlots(getAvailableTimeSlots(occupiedTimeSlots));
@@ -64,44 +84,43 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
       '14:00-15:00',
       '15:00-16:00',
     ];
-    
+
     return allTimeSlots.filter(slot => !occupiedTimeSlots.includes(slot));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const formattedDate = formatDateForServer(date);
-  
+
     const appointmentData = {
       pet: selectedPet,
       veterinarian: selectedVet,
       date: formattedDate,
       timeSlot: timeSlot,
     };
-  
+
     console.log('Sending appointment data:', appointmentData);
-  
-    fetch('http://localhost:5000/appointments', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(appointmentData),
-    })
-      .then(response => response.json())
-      .then((data) => {
-        console.log('Appointment created:', data);
-        onSave();
-        handleCloseModal();
-      })
-      .catch((error) => {
-        console.error('Error creating appointment:', error);
-        alert(`Error al guardar la cita: ${error.message}`);
+
+    try {
+      const response = await fetch(`${DATABASE_URL}/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
       });
+      const data = await response.json();
+      console.log('Appointment created:', data);
+      onSave();
+      handleCloseModal();
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      alert(`Error al guardar la cita: ${error.message}`);
+    }
   };
-  
+
   const formatDateForServer = (dateString) => {
     if (!dateString) return null;
-  
+
     const [year, month, day] = dateString.split('-');
     return `${year}-${month}-${day}T00:00:00.000Z`;
   };

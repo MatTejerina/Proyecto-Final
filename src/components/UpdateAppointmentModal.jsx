@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import axios from 'axios';
+
+const DATABASE_URL = 'http://localhost:4500';
 
 function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
   const [date, setDate] = useState('');
   const [timeSlot, setTimeSlot] = useState('');
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-  const [showAlert, setShowAlert] = useState(false); // Estado para mostrar la alerta de disponibilidad
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (appointment) {
@@ -18,8 +19,8 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
 
   const fetchAvailableTimeSlots = async (vetId, selectedDate) => {
     try {
-      const response = await axios.get(`http://localhost:5000/appointments/${vetId}/${selectedDate}`);
-      const appointments = response.data;
+      const response = await fetch(`${DATABASE_URL}/appointments/${vetId}/${selectedDate}`);
+      const appointments = await response.json();
       const occupiedTimeSlots = appointments.map(appointment => appointment.timeSlot);
       setAvailableTimeSlots(getAvailableTimeSlots(occupiedTimeSlots));
     } catch (error) {
@@ -38,9 +39,8 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
       '14:00-15:00',
       '15:00-16:00',
     ];
-    
-    const availableTimeSlots = allTimeSlots.filter(slot => !occupiedTimeSlots.includes(slot));
-    return availableTimeSlots;
+
+    return allTimeSlots.filter(slot => !occupiedTimeSlots.includes(slot));
   };
 
   const handleSave = async () => {
@@ -48,22 +48,20 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
       console.error('Datos de la cita son inválidos:', appointment);
       return;
     }
-  
-    const formattedDate = formatDateForServer(date);
-  
+
     try {
-      const response = await fetch(`http://localhost:5000/appointments/${appointment._id}`, {
+      const response = await fetch(`${DATABASE_URL}/appointments/${appointment._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ date: formattedDate, timeSlot }),
+        body: JSON.stringify({ date, timeSlot }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Error al actualizar la cita');
       }
-  
+
       const updatedAppointment = await response.json();
       onUpdate(updatedAppointment);
       handleClose();
@@ -71,20 +69,12 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
       console.error('Error al actualizar la cita:', error.message);
     }
   };
-  
 
   const formatDateForInput = (dateString) => {
     if (!dateString) return '';
-    
+
     const dateObj = new Date(dateString);
     return dateObj.toISOString().split('T')[0];
-  };
-
-  const formatDateForServer = (dateString) => {
-    if (!dateString) return null;
-
-    const [year, month, day] = dateString.split('-');
-    return `${year}-${month}-${day}`;
   };
 
   const handleDateChange = async (e) => {
@@ -127,7 +117,7 @@ function UpdateAppointmentModal({ show, handleClose, appointment, onUpdate }) {
               type="date"
               value={date}
               onChange={handleDateChange}
-              min={getTodayDateString()} // Establece la fecha mínima como la fecha actual
+              min={getTodayDateString()}
             />
           </Form.Group>
           <Form.Group>
