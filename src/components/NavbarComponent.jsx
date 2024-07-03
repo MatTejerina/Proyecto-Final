@@ -16,9 +16,10 @@ import { Link } from 'react-router-dom';
 
 const pages = [{ name: 'Inicio', path: '/' }];
 const settings = [
+  { name: 'Administración', path: '/adminPage' },
   { name: 'Pacientes', path: '/patientPage' },
   { name: 'Turnos', path: '/appointmentPage' },
-  { name: 'Logout', path: '/logout' }
+  { name: 'Cerrar Sesion', path: '/logout' }
 ];
 
 function NavbarComponent() {
@@ -135,7 +136,7 @@ function NavbarComponent() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>

@@ -61,8 +61,8 @@ function AppointmentTable({ appointmentsUpdated }) {
 
     return appointments.map((appointment) => (
       <tr key={appointment._id}>
-        <td>{appointment.pet.owner ? appointment.pet.owner.dni : 'Unknown'}</td>
-        <td>{appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
+        <td>{appointment._id}</td>
+        <td>{appointment.pet && appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
         <td>{appointment.pet ? appointment.pet.name : 'Unknown'}</td>
         <td>{appointment.veterinarian ? appointment.veterinarian.name : 'Unknown'}</td>
         <td onClick={() => handleShowUpdateModal(appointment)}>{appointment.date}</td>
@@ -77,9 +77,9 @@ function AppointmentTable({ appointmentsUpdated }) {
   return (
     <div>
       <Table striped bordered hover>
-        <thead>
+        <thead className=' text-center'>
           <tr>
-            <th>DNI</th>
+            <th>ID</th>
             <th>Dueño</th>
             <th>Mascota</th>
             <th>Veterinario</th>
@@ -88,7 +88,7 @@ function AppointmentTable({ appointmentsUpdated }) {
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className=' text-center'>
           {renderTableRows()}
         </tbody>
       </Table>

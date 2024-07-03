@@ -4,13 +4,13 @@ import { Modal, Button, Form } from 'react-bootstrap';
 const DATABASE_URL = 'http://localhost:4500';
 
 const VeterinarianFormModal = ({ show, handleClose, onSave }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [prefix, setPrefix] = useState('Dr.');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleSave = async () => {
     const veterinarianData = {
-      name,
-      email,
+      name: `${prefix} ${firstName} ${lastName}`,
     };
 
     console.log('Sending veterinarian data:', veterinarianData);
@@ -34,8 +34,9 @@ const VeterinarianFormModal = ({ show, handleClose, onSave }) => {
   };
 
   const resetForm = () => {
-    setName('');
-    setEmail('');
+    setPrefix('Dr.');
+    setFirstName('');
+    setLastName('');
   };
 
   const handleCloseModal = () => {
@@ -51,19 +52,29 @@ const VeterinarianFormModal = ({ show, handleClose, onSave }) => {
       <Modal.Body>
         <Form>
           <Form.Group>
+            <Form.Control
+              as="select"
+              value={prefix}
+              onChange={(e) => setPrefix(e.target.value)}
+            >
+              <option value="Dr.">Dr.</option>
+              <option value="Dra.">Dra.</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Apellido</Form.Label>
             <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </Form.Group>
         </Form>
@@ -72,7 +83,7 @@ const VeterinarianFormModal = ({ show, handleClose, onSave }) => {
         <Button variant="secondary" onClick={handleCloseModal}>
           Cerrar
         </Button>
-        <Button variant="primary" onClick={handleSave} disabled={!name || !email}>
+        <Button variant="primary" onClick={handleSave} disabled={!firstName || !lastName}>
           Guardar
         </Button>
       </Modal.Footer>

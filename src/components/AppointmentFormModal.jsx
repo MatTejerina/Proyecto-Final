@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 const DATABASE_URL = 'http://localhost:4500';
 
-const AppointmentFormModal = ({ show, handleClose, onSave }) => {
+function AppointmentFormModal({ show, handleClose, onSave }) {
   const [veterinarians, setVeterinarians] = useState([]);
   const [owners, setOwners] = useState([]);
   const [pets, setPets] = useState([]);
@@ -15,43 +15,27 @@ const AppointmentFormModal = ({ show, handleClose, onSave }) => {
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const vetsResponse = await fetch(`${DATABASE_URL}/veterinarians`);
-        const vetsData = await vetsResponse.json();
-        setVeterinarians(vetsData);
-      } catch (error) {
-        console.error('Error fetching veterinarians:', error);
-      }
-    };
-    fetchData();
+    fetch(`${DATABASE_URL}/veterinarians`)
+      .then(response => response.json())
+      .then(data => setVeterinarians(data))
+      .catch(error => console.error('Error fetching veterinarians:', error));
   }, []);
 
   useEffect(() => {
-    const fetchOwners = async () => {
-      try {
-        const response = await fetch(`${DATABASE_URL}/users`);
-        const data = await response.json();
-        setOwners(data);
-      } catch (error) {
-        console.error('Error fetching owners:', error);
-      }
-    };
-    fetchOwners();
-  }, []);
+    if (selectedVet) {
+      fetch(`${DATABASE_URL}/users`)
+        .then(response => response.json())
+        .then(data => setOwners(data))
+        .catch(error => console.error('Error fetching owners:', error));
+    }
+  }, [selectedVet]);
 
   useEffect(() => {
     if (selectedOwner) {
-      const fetchPets = async () => {
-        try {
-          const response = await fetch(`${DATABASE_URL}/pets/owner/${selectedOwner}`);
-          const data = await response.json();
-          setPets(data);
-        } catch (error) {
-          console.error('Error fetching pets:', error);
-        }
-      };
-      fetchPets();
+      fetch(`${DATABASE_URL}/pets/owner/${selectedOwner}`)
+        .then(response => response.json())
+        .then(data => setPets(data))
+        .catch(error => console.error('Error fetching pets:', error));
     }
   }, [selectedOwner]);
 
@@ -82,43 +66,44 @@ const AppointmentFormModal = ({ show, handleClose, onSave }) => {
       '14:00-15:00',
       '15:00-16:00',
     ];
-
+    
     return allTimeSlots.filter(slot => !occupiedTimeSlots.includes(slot));
   };
 
-  const handleSave = async () => {
+  const handleSave = () => {
     const formattedDate = formatDateForServer(date);
-
+  
     const appointmentData = {
       pet: selectedPet,
       veterinarian: selectedVet,
       date: formattedDate,
       timeSlot: timeSlot,
     };
-
+  
     console.log('Sending appointment data:', appointmentData);
-
-    try {
-      const response = await fetch(`${DATABASE_URL}/appointments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(appointmentData),
+  
+    fetch(`${DATABASE_URL}/appointments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(appointmentData),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log('Appointment created:', data);
+        onSave();
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error('Error creating appointment:', error);
+        alert(`Error al guardar la cita: ${error.message}`);
       });
-      const data = await response.json();
-      console.log('Appointment created:', data);
-      onSave();
-      handleCloseModal();
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-      alert(`Error al guardar la cita: ${error.message}`);
-    }
   };
-
+  
   const formatDateForServer = (dateString) => {
     if (!dateString) return null;
-
+  
     const [year, month, day] = dateString.split('-');
     return `${year}-${month}-${day}T00:00:00.000Z`;
   };
@@ -192,8 +177,8 @@ const AppointmentFormModal = ({ show, handleClose, onSave }) => {
             >
               <option value="">Seleccionar</option>
               {pets.map((pet) => (
-                <option key={pet._id} value={pet._id}>
-                  {pet.name}
+                <option key={pet._id} value={pet._id} disabled={pet.appointment}>
+                  {pet.name} {pet.appointment && '(Ya tiene turno)'}
                 </option>
               ))}
             </Form.Control>

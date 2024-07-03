@@ -37,19 +37,17 @@ const VeterinarianList = () => {
 
   return (
     <div>
-      <Button onClick={() => setShowModal(true)}>Agregar Veterinario</Button>
+      <Button onClick={() => setShowModal(true)} className=' mb-2'>Agregar Veterinario</Button>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Email</th>
+            <th>Nombre y Apellido</th>
           </tr>
         </thead>
         <tbody>
           {veterinarians.map((vet) => (
             <tr key={vet._id}>
-              <td>{vet.name}</td>
-              <td>{vet.email}</td>
+              <td>{vet.name}{vet.lastName}</td>
             </tr>
           ))}
         </tbody>
