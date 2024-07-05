@@ -6,6 +6,7 @@ import ErrorPage from '../pages/ErrorPage';
 import RegisterPage from '../pages/RegisterPage';
 import ContacPage from '../pages/ContacPage';
 import AboutPage from '../pages/AboutPage';
+import Footer from '../components/FooterComponent';
 
 const PublicRouter = ({ user, setUser }) => {
   return (
@@ -21,6 +22,7 @@ const PublicRouter = ({ user, setUser }) => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
 
   )

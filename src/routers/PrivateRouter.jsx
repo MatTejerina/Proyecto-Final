@@ -7,6 +7,8 @@ import PatientPage from '../pages/PatientPage';
 import PlansPage from '../pages/PlansPage';
 import ContacPage from '../pages/ContacPage';
 import AboutPage from '../pages/AboutPage';
+import ErrorPage from '../pages/ErrorPage';
+import Footer from '../components/FooterComponent';
 
 
 const PrivateRouter = ({ user, setUser }) => {
@@ -22,7 +24,9 @@ const PrivateRouter = ({ user, setUser }) => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/patients" element={<PatientPage />} />
         <Route path="/home" element={<HomePage setUser={setUser} />} />
+        <Route path="/error" element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
