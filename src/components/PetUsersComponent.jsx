@@ -7,6 +7,7 @@ const PetUsersComponent = ({ userId }) => {
   const [userPets, setUserPets] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedPet, setSelectedPet] = useState(null);
   const [formValues, setFormValues] = useState({
     name: '',
@@ -50,7 +51,7 @@ const PetUsersComponent = ({ userId }) => {
       const newPet = await response.json();
       setUserPets([...userPets, newPet]);
       setShowAddModal(false);
-      setFormValues({ name: '', type: '', age: '' });
+      setFormValues({ name: '', type: '', age: '', race: '' });
     } catch (error) {
       console.error(error);
     }
@@ -71,13 +72,12 @@ const PetUsersComponent = ({ userId }) => {
       setShowEditModal(false);
       if (selectedPet) {
         setSelectedPet(null);
-        setFormValues({ name: '', type: '', age: '', race:'' });
+        setFormValues({ name: '', type: '', age: '', race: '' });
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   const handleDeletePet = async (petId) => {
     try {
@@ -88,6 +88,7 @@ const PetUsersComponent = ({ userId }) => {
         throw new Error('Error al eliminar la mascota');
       }
       setUserPets(userPets.filter(pet => pet._id !== petId));
+      setShowDeleteModal(false);
     } catch (error) {
       console.error(error);
     }
@@ -99,9 +100,21 @@ const PetUsersComponent = ({ userId }) => {
     setShowEditModal(true);
   };
 
+  const openDeleteModal = (pet) => {
+    setSelectedPet(pet);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeletePet = () => {
+    if (selectedPet) {
+      handleDeletePet(selectedPet._id);
+      setSelectedPet(null);
+    }
+  };
+
   return (
     <div>
-      <Button variant="primary" size='sm' className=' mb-1' onClick={() => setShowAddModal(true)}>Agregar Mascota</Button>
+      <Button variant="primary" size='sm' className='mb-1' onClick={() => setShowAddModal(true)}>Agregar Mascota</Button>
       <ListGroup>
         {userPets.map(pet => (
           <ListGroup.Item className='' key={pet._id}>
@@ -109,9 +122,9 @@ const PetUsersComponent = ({ userId }) => {
             <strong>Tipo:</strong> {pet.type}<br />
             <strong>Raza:</strong> {pet.race}<br />
             <strong>Edad:</strong> {pet.age}
-            <div className=' d-flex justify-content-end'>
-              <Button variant="warning" size='sm' onClick={() => openEditModal(pet)} className=' ms-2'>Editar</Button>
-              <Button variant="danger" size='sm' onClick={() => handleDeletePet(pet._id)} className=' ms-2'>Eliminar</Button>
+            <div className='d-flex justify-content-end'>
+              <Button variant="warning" size='sm' onClick={() => openEditModal(pet)} className='ms-2'>Editar</Button>
+              <Button variant="danger" size='sm' onClick={() => openDeleteModal(pet)} className='ms-2'>Eliminar</Button>
             </div>
           </ListGroup.Item>
         ))}
@@ -140,7 +153,7 @@ const PetUsersComponent = ({ userId }) => {
               <Form.Label>Edad</Form.Label>
               <Form.Control type="number" name="age" value={formValues.age} onChange={handleFormChange} />
             </Form.Group>
-            <Button variant="primary" className=' mt-2' onClick={handleAddPet}>Agregar</Button>
+            <Button variant="primary" className='mt-2' onClick={handleAddPet}>Agregar</Button>
           </Form>
         </Modal.Body>
       </Modal>
@@ -171,6 +184,21 @@ const PetUsersComponent = ({ userId }) => {
             <Button variant="primary" onClick={handleEditPet}>Guardar Cambios</Button>
           </Form>
         </Modal.Body>
+      </Modal>
+
+      {/* Modal para eliminar mascota */}
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>¿Está seguro de que desea eliminar la mascota {selectedPet?.name}?</p>
+          <p>Esta acción también eliminará todos los turnos asociados.</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>Cancelar</Button>
+          <Button variant="danger" onClick={confirmDeletePet}>Eliminar</Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );

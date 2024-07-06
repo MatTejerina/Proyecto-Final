@@ -80,7 +80,7 @@ function AppointmentFormModal({ show, handleClose, onSave }) {
       timeSlot: timeSlot,
     };
   
-    console.log('Sending appointment data:', appointmentData);
+    // console.log('Sending appointment data:', appointmentData);
   
     fetch(`${DATABASE_URL}/appointments`, {
       method: 'POST',

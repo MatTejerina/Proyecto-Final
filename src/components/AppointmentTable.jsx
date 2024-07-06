@@ -61,7 +61,6 @@ function AppointmentTable({ appointmentsUpdated }) {
 
     return appointments.map((appointment) => (
       <tr key={appointment._id}>
-        <td>{appointment._id}</td>
         <td>{appointment.pet && appointment.pet.owner ? `${appointment.pet.owner.firstName} ${appointment.pet.owner.lastName}` : 'Unknown'}</td>
         <td>{appointment.pet ? appointment.pet.name : 'Unknown'}</td>
         <td>{appointment.veterinarian ? appointment.veterinarian.name : 'Unknown'}</td>
@@ -79,7 +78,6 @@ function AppointmentTable({ appointmentsUpdated }) {
       <Table striped bordered hover>
         <thead className=' text-center'>
           <tr>
-            <th>ID</th>
             <th>Dueño</th>
             <th>Mascota</th>
             <th>Veterinario</th>

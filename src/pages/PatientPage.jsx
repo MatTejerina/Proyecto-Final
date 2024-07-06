@@ -131,7 +131,7 @@ const PatientPage = () => {
     <Container>
       <Row className="mt-3">
         <Col>
-          <h2 className="text-center">Lista de Usuarios</h2>
+          <h2 className="text-center">Lista de Usuarios y Mascotas</h2>
         </Col>
       </Row>
       <Row className="mt-3">

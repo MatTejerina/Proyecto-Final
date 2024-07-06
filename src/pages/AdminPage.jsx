@@ -45,6 +45,16 @@ const AdminPage = () => {
     fetchVeterinarians();
   }, []);
 
+  const renderTableRows = () => {
+    if (!appointments || appointments.length === 0) {
+      return (
+        <tr>
+          <td colSpan="7" className="text-center">No hay citas disponibles</td>
+        </tr>
+      );
+    }
+  }
+
   return (
     <Container>
       <div className='text-center'>
@@ -65,6 +75,9 @@ const AdminPage = () => {
               <th>Horario</th>
             </tr>
           </thead>
+          <tbody className=' text-center'>
+          {renderTableRows()}
+        </tbody>
           <tbody className='text-center'>
             {appointments.map(appointment => (
               <tr key={appointment._id}>
@@ -77,6 +90,7 @@ const AdminPage = () => {
               </tr>
             ))}
           </tbody>
+          
         </Table>
       </div>
 
