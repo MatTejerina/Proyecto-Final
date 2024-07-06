@@ -20,7 +20,8 @@ const PublicRouter = ({ user, setUser }) => {
         <Route path="/register" element={<RegisterPage setUser={setUser} user={user} />} />
         <Route path="/contact" element={<ContacPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/404" element={<ErrorPage />} />
+        <Route path="/*" element={<Navigate to='/404' />} />
       </Routes>
       <Footer />
     </BrowserRouter>

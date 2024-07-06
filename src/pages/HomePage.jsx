@@ -8,8 +8,7 @@ import { Box, Container as ContainerM, TextField, Typography } from '@mui/materi
 
 const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_API_KEY}&q=`
 
-const HomePage = ({ setUser }) => {
-  const [city, setCity] = useState();
+const HomePage = () => {
   const [weather, setWeather] = useState(
     {
       city: '',
@@ -19,6 +18,7 @@ const HomePage = ({ setUser }) => {
       icon: "",
       conditionText: ""
     });
+  let [vet, setVet] = useState([{ name: null }])
   const handleWeather = async () => {
     const response = await fetch(`${API_WEATHER}${"San Miguel de Tucuman"}`);
     const data = await response.json();
@@ -32,8 +32,20 @@ const HomePage = ({ setUser }) => {
       conditionText: data.current.condition.text
     });
   }
+  const checkVet = async (data) => {
+    try {
+      const response = await fetch('http://localhost:3000/veterinarians', {
+        method: 'GET'
+      });
+      const data = await response.json();
+      setVet(data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
   useEffect(() => {
     handleWeather();
+    checkVet();
   }, []);
 
   return (
@@ -127,16 +139,31 @@ const HomePage = ({ setUser }) => {
           </Col>
         </Row>
       </Container>
+      <Container className=" text-center mt-1">
+        <h2 className=" products text-center mb-4">Nuestros Profesionales</h2>
+        <Row className="justify-content-center">
+          {vet.map((item, index) => (
+            <Col md={3} className="mb-4" key={index}>
+              <Card className="h-100">
+                <Card.Img variant="top" src="https://us.123rf.com/450wm/pshonka/pshonka2209/pshonka220900119/194044547-icono-aislado-del-vector-veterinario-signo-de-animales-de-compa%C3%B1%C3%ADa-s%C3%ADmbolo-gr%C3%A1fico-para-el-dise%C3%B1o.jpg?ver=6" />
+                <Card.Body>
+                  <Card.Title>{item.name}</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
       <Container className="mt-4">
         <h2 className=" products text-center mb-4">PRODUCTOS DESTACADOS</h2>
         <Row className="justify-content-center">
           <Col md={3} className="mb-4">
-            <Card className="h-100" as={Link} to='/error'>
+            <Card className="h-100" as={Link} to='/404'>
               <Card.Img variant="top" src="https://d23qt3x1ychzdy.cloudfront.net/dev_images_products/53d5db8f3ae26994b5fbf80d3c01ddda_1696439896.jpg" />
               <Card.Body>
                 <Badge bg="success" className="mb-2">NUEVO</Badge>
                 <Badge bg="info" className="mb-2">-10%</Badge>
-                <Card.Title as={Link} to='/error'>Arena Premium Furry Lavanda 7 KG</Card.Title>
+                <Card.Title as={Link} to='/404'>Arena Premium Furry Lavanda 7 KG</Card.Title>
                 <Card.Text>
                   Presentación: Envase x 7 kg
                 </Card.Text>
@@ -144,7 +171,7 @@ const HomePage = ({ setUser }) => {
             </Card>
           </Col>
           <Col md={3} className="mb-4">
-            <Card className="h-100" as={Link} to='/error'>
+            <Card className="h-100" as={Link} to='/404'>
               <Card.Img variant="top" src="https://www.purina.com.ar/sites/default/files/styles/simple_card/public/2022-08/adult_pro_plan.png.webp?itok=LRbOLUgB" />
               <Card.Body>
                 <Badge bg="info" className="mb-2">-10%</Badge>
@@ -156,11 +183,11 @@ const HomePage = ({ setUser }) => {
             </Card>
           </Col>
           <Col md={3} className="mb-4">
-            <Card className="h-100" as={Link} to='/error'>
+            <Card className="h-100" as={Link} to='/404'>
               <Card.Img variant="top" src="https://storage.googleapis.com/catalog-pictures-carrefour-es/catalog/pictures/hd_510x_/8719138813957_1.jpg" />
               <Card.Body>
                 <Badge bg="info" className="mb-2">-10%</Badge>
-                <Card.Title className='card-title' as={Link} to='/error'>Juguete para perros cuerdas </Card.Title>
+                <Card.Title className='card-title' as={Link} to='/404'>Juguete para perros cuerdas </Card.Title>
                 <Card.Text>
 
                   Cuerdas Xl De 70+50cm Grandes Y Fuertes-nobleza
@@ -169,11 +196,11 @@ const HomePage = ({ setUser }) => {
             </Card>
           </Col>
           <Col md={3} className="mb-4">
-            <Card className="h-100" as={Link} to='/error'>
+            <Card className="h-100" as={Link} to='/404'>
               <Card.Img variant="top" src="https://i5.walmartimages.com.mx/mg/gm/1p/images/product-images/img_large/00750229052123l.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" />
               <Card.Body>
                 <Badge bg="info" className="mb-2">-10%</Badge>
-                <Card.Title className='card-title' as={Link} to='/error'>Casa Rascador para Gatos </Card.Title>
+                <Card.Title className='card-title' as={Link} to='/404'>Casa Rascador para Gatos </Card.Title>
                 <Card.Text>
                   Iglú Golden King 75 cm 2 en 1
                 </Card.Text>

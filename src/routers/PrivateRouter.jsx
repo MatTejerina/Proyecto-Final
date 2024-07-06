@@ -17,14 +17,17 @@ const PrivateRouter = ({ user, setUser }) => {
     <BrowserRouter>
       <NavbarComponent user={user} setUser={setUser} />
       <Routes>
-        <Route path="/admin" element={<AdminPage />} />
+        {
+          user.isAdmin ? <Route path="/admin" element={<AdminPage />} /> : null
+        }
         <Route path="/turns" element={<TurnPage />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/contact" element={<ContacPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/patients" element={<PatientPage />} />
         <Route path="/home" element={<HomePage setUser={setUser} />} />
-        <Route path="/error" element={<ErrorPage />} />
+        <Route path="/404" element={<ErrorPage />} />
+        <Route path="/*" element={<Navigate to='/404' />} />
       </Routes>
       <Footer />
     </BrowserRouter>
