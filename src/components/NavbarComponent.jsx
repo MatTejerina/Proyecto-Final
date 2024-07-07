@@ -1,102 +1,176 @@
-import React, { useEffect } from 'react'
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/esm/Button';
-import { enqueueSnackbar } from 'notistack';
-import { useNavigate, Link } from 'react-router-dom'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
-const NavbarComponent = ({ user, setUser }) => {
-  const isLoginPage = window.location.pathname === '/login';
-  const isAdminPage = window.location.pathname === '/admin';
-  const isTurnPage = window.location.pathname === '/turns';
-  const isPatientPage = window.location.pathname === '/patients';
-  const navigate = useNavigate();
+const pages = [{ name: 'Inicio', path: '/' }];
+const settings = [
+  { name: 'Administración', path: '/adminPage' },
+  { name: 'Pacientes', path: '/patientPage' },
+  { name: 'Turnos', path: '/appointmentPage' },
+  { name: 'Cerrar Sesion', path: '/logout' }
+];
 
-  const handleLogOut = () => {
-    localStorage.clear();
-    setUser({
-      token: null,
-      userInfo: null,
-      logged: false,
-      isAdmin: false
-    })
-    navigate('/login');
-    enqueueSnackbar('Se cerro la sesion', { variant: 'success' })
-  }
+function NavbarComponent() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <>
-      <Navbar expand="lg" className="bg-body-tertiary ">
-        <Container fluid>
-          <Navbar.Brand href="#">RollingVet</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-              <Nav.Link as={Link} className='link' to='/home'>Home </Nav.Link>
-              <Nav.Link as={Link} className='link' to='/plans'>Planes</Nav.Link>
-              <NavDropdown title="Info" id="navbarScrollingDropdown">
-                <NavDropdown.Item as={Link} className='link' to='/about' >Acerca de Nosotros</NavDropdown.Item>
-                <NavDropdown.Item as={Link} className='link' to='/contact'>
-                  Contacto
-                </NavDropdown.Item>
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {page.name}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="div"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {page.name}
+                </Link>
+              </Button>
+            ))}
+          </Box>
 
-              </NavDropdown>
-              {
-                user.isAdmin && !isAdminPage && !isTurnPage && !isPatientPage ? (
-                  (<Nav.Link as={Link} className='link' to='/admin'>
-                    Administracion
-                  </Nav.Link>)
-
-                ) :
-                  null
-
-              }
-              {
-                isAdminPage || isTurnPage || isPatientPage ?
-                  <NavDropdown title="Administrar" id="navbarScrollingDropdown">
-
-                    <NavDropdown.Item as={Link} className='link' to='/patients'>Pacientes</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} className='link' to='/turns'>
-                      Turnos
-                    </NavDropdown.Item>
-                    {
-                      isTurnPage || isPatientPage ?
-                        <NavDropdown.Item as={Link} className='link' to='/admin'>
-                          Administracion
-                        </NavDropdown.Item> :
-                        null
-                    }
-                  </NavDropdown> : null
-              }
-
-            </Nav>
-            <Form className="d-flex">
-              {
-                user.logged ? (
-                  <Nav.Link>
-                    <Button onClick={() => handleLogOut()}>Cerrar Sesion</Button>
-                  </Nav.Link>
-                ) : isLoginPage ?
-                  null
-                  : (
-                    <Nav.Link href='/login'>
-                      <Button>Iniciar Sesion</Button>
-                    </Nav.Link>
-                  )
-              }
-            </Form>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar >
-    </>
-  )
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Menu">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {setting.name}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
-
 export default NavbarComponent;
