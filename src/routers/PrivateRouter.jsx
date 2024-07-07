@@ -12,25 +12,27 @@ import Footer from '../components/FooterComponent';
 
 
 const PrivateRouter = ({ user, setUser }) => {
+  const isAdminPage = window.location.pathname === '/adminPage';
   return (
 
-    <BrowserRouter>
-      <NavbarComponent user={user} setUser={setUser} />
+    <>
       <Routes>
-        {
-          user.isAdmin ? <Route path="/adminPage" element={<AdminPage />} /> : null
+        {user.isAdmin ? <Route path="/adminPage" element={<AdminPage />} /> : null}
+        {user.isAdmin ? <Route path="/appointmentPage" element={<AppointmentsPage />} /> : null}
+        {user.isAdmin ? <Route path="/patientPage" element={<PatientPage />} /> : null
         }
-        <Route path="/appointmentPage" element={<AppointmentsPage />} />
+
         <Route path="/plansPage" element={<PlansPage />} />
         <Route path="/contactPage" element={<ContactPage />} />
         <Route path="/aboutPage" element={<AboutPage />} />
-        <Route path="/patientPage" element={<PatientPage />} />
+
         <Route path="/homePage" element={<HomePage setUser={setUser} />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/errorPage" element={<ErrorPage />} />
         <Route path="/*" element={<Navigate to='/errorPage' />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
   )
 }
 export default PrivateRouter;

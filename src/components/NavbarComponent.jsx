@@ -12,23 +12,34 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const pages = [{ name: 'Inicio', path: '/' }];
+const pages = [{ name: 'Inicio', path: '/homePage' }];
 const settings = [
-  { name: 'Administración', path: '/adminPage' },
-  { name: 'Pacientes', path: '/patientPage' },
-  { name: 'Turnos', path: '/appointmentPage' },
-  { name: 'Cerrar Sesion', path: '/logout' }
+  { name: 'Iniciar Sesión', path: '/loginPage' },
 ];
 
-function NavbarComponent() {
+function NavbarComponent({ user, setUser }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    setUser({
+      token: null,
+      userInfo: null,
+      logged: false,
+      isAdmin: false
+    });
+    navigate('/loginPage');
+    enqueueSnackbar('Se cerró la sesión', { variant: 'success' });
+  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -157,15 +168,59 @@ function NavbarComponent() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+              {user.logged ? (
+                <>
+                  {settings
+                    .filter(setting => setting.name !== 'Iniciar Sesión')
+                    .map((setting) => (
+                      <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            {setting.name}
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  {user.isAdmin && (
+                    <>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link to="/adminPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            Administración
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link to="/patientPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            Pacientes
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                      <MenuItem onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">
+                          <Link to="/appointmentPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            Turnos
+                          </Link>
+                        </Typography>
+                      </MenuItem>
+                    </>
+                  )}
+                  <MenuItem onClick={handleLogOut}>
+                    <Typography textAlign="center">
+                      Cerrar Sesión
+                    </Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                      {setting.name}
+                    <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Iniciar Sesión
                     </Link>
                   </Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
           </Box>
         </Toolbar>
@@ -173,4 +228,5 @@ function NavbarComponent() {
     </AppBar>
   );
 }
+
 export default NavbarComponent;

@@ -1,11 +1,10 @@
-import '../App.css'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { enqueueSnackbar } from 'notistack';
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-
+import '../styles/LoginPage.css'
 
 const LoginPage = ({ setUser }) => {
 
@@ -37,7 +36,7 @@ const LoginPage = ({ setUser }) => {
       isAdmin: loginData.isAdmin
     })
 
-    window.location.href = '/home'
+    window.location.href = '/homePage'
   };
 
 

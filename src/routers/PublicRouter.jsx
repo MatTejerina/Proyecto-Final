@@ -11,11 +11,10 @@ import Footer from '../components/FooterComponent';
 const PublicRouter = ({ user, setUser }) => {
   return (
 
-    <BrowserRouter>
-      <NavbarComponent user={user} setUser={setUser} />
+    <>
       <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/homePage" element={<HomePage />} />
+        <Route path="/" element={<Navigate to="/homePage" />} />
         <Route path="/loginPage" element={<LoginPage setUser={setUser} />} />
         <Route path="/registerPage" element={<RegisterPage setUser={setUser} user={user} />} />
         <Route path="/contactPage" element={<ContactPage />} />
@@ -24,7 +23,7 @@ const PublicRouter = ({ user, setUser }) => {
         <Route path="/*" element={<Navigate to='/errorPage' />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
 
   )
 }

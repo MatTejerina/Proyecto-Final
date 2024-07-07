@@ -40,6 +40,7 @@ function App() {
   }, []);
   return (
     <>
+      <NavbarComponent user={user} setUser={setUser} />
       <SnackbarProvider>
         {
           user.logged ?
