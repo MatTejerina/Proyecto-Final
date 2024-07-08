@@ -11,13 +11,12 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../assets/Logo.png';
+import { enqueueSnackbar } from 'notistack';
 
 const pages = [{ name: 'Inicio', path: '/homePage' }];
-const settings = [
-  { name: 'Iniciar Sesión', path: '/loginPage' },
-];
+const settings = [{ name: 'Iniciar Sesión', path: '/loginPage' }];
 
 function NavbarComponent({ user, setUser }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -56,7 +55,12 @@ function NavbarComponent({ user, setUser }) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* Logo for larger screens */}
+          <Box
+            component="img"
+            src={Logo}
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: 'auto', height: '40px' }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -114,7 +118,12 @@ function NavbarComponent({ user, setUser }) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* Logo for smaller screens */}
+          <Box
+            component="img"
+            src={Logo}
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width: 'auto', height: '40px' }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -168,51 +177,47 @@ function NavbarComponent({ user, setUser }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {user.logged ? (
-                <>
-                  {settings
-                    .filter(setting => setting.name !== 'Iniciar Sesión')
-                    .map((setting) => (
-                      <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            {setting.name}
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                    ))}
-                  {user.isAdmin && (
-                    <>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/adminPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Administración
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/patientPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Pacientes
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/appointmentPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Turnos
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                    </>
-                  )}
-                  <MenuItem onClick={handleLogOut}>
+              {user.logged ? [
+                ...settings
+                  .filter(setting => setting.name !== 'Iniciar Sesión')
+                  .map((setting) => (
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          {setting.name}
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  )),
+                ...(user.isAdmin ? [
+                  <MenuItem key="adminPage" onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
-                      Cerrar Sesión
+                      <Link to="/adminPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Administración
+                      </Link>
+                    </Typography>
+                  </MenuItem>,
+                  <MenuItem key="patientPage" onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">
+                      <Link to="/patientPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Pacientes
+                      </Link>
+                    </Typography>
+                  </MenuItem>,
+                  <MenuItem key="appointmentPage" onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">
+                      <Link to="/appointmentPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Turnos
+                      </Link>
                     </Typography>
                   </MenuItem>
-                </>
-              ) : (
+                ] : []),
+                <MenuItem key="logout" onClick={handleLogOut}>
+                  <Typography textAlign="center">
+                    Cerrar Sesión
+                  </Typography>
+                </MenuItem>
+              ] : (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
                     <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>

@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import '../styles/LoginPage.css'
 
+const DATABASE_URL = 'http://localhost:4500';
+
 const LoginPage = ({ setUser }) => {
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch(`${DATABASE_URL}/login`, {
       method: 'POST',
       // credentials: 'include',
       headers: {
