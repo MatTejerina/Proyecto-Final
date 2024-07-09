@@ -16,6 +16,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const pages = [{ name: 'Inicio', path: '/homePage' }];
 const settings = [
+  { name: 'Administración', path: '/adminPage' },
+  { name: 'Pacientes', path: '/patientPage' },
+  { name: 'Turnos', path: '/appointmentPage' },
   { name: 'Iniciar Sesión', path: '/loginPage' },
 ];
 
@@ -168,59 +171,32 @@ function NavbarComponent({ user, setUser }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {user.logged ? (
-                <>
-                  {settings
-                    .filter(setting => setting.name !== 'Iniciar Sesión')
-                    .map((setting) => (
-                      <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            {setting.name}
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                    ))}
-                  {user.isAdmin && (
-                    <>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/adminPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Administración
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/patientPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Pacientes
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                      <MenuItem onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">
-                          <Link to="/appointmentPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Turnos
-                          </Link>
-                        </Typography>
-                      </MenuItem>
-                    </>
-                  )}
-                  <MenuItem onClick={handleLogOut}>
-                    <Typography textAlign="center">
-                      Cerrar Sesión
-                    </Typography>
-                  </MenuItem>
-                </>
-              ) : (
-                <MenuItem onClick={handleCloseUserMenu}>
+              {user.logged ? [
+                ...settings
+                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Pacientes' && setting.name !== 'Turnos')))
+                  .map((setting) => (
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          {setting.name}
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  )),
+                <MenuItem key="Cerrar Sesión" onClick={handleLogOut}>
+                  <Typography textAlign="center">
+                    Cerrar Sesión
+                  </Typography>
+                </MenuItem>
+              ] : [
+                <MenuItem key="Iniciar Sesión" onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
                     <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                       Iniciar Sesión
                     </Link>
                   </Typography>
                 </MenuItem>
-              )}
+              ]}
             </Menu>
           </Box>
         </Toolbar>

@@ -11,7 +11,7 @@ const LoginPage = ({ setUser }) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('http://localhost:4500/login', {
       method: 'POST',
       // credentials: 'include',
       headers: {
@@ -68,7 +68,7 @@ const LoginPage = ({ setUser }) => {
         <Button variant="primary" type='submit'>
           Iniciar Sesion
         </Button>
-        <p className='text-dark m-0'>No tienes una cuenta? <Link to='/register'> Registrarse</Link></p>
+        <p className='text-dark m-0'>No tienes una cuenta? <Link to='/errorPage'> Registrarse</Link></p>
       </Form>
     </>
   );

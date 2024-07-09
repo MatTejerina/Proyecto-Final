@@ -16,6 +16,7 @@ const PrivateRouter = ({ user, setUser }) => {
   return (
 
     <>
+      <NavbarComponent user={user} setUser={setUser} />
       <Routes>
         {user.isAdmin ? <Route path="/adminPage" element={<AdminPage />} /> : null}
         {user.isAdmin ? <Route path="/appointmentPage" element={<AppointmentsPage />} /> : null}

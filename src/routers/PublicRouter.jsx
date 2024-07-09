@@ -12,6 +12,7 @@ const PublicRouter = ({ user, setUser }) => {
   return (
 
     <>
+      <NavbarComponent user={user} setUser={setUser} />
       <Routes>
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/" element={<Navigate to="/homePage" />} />
