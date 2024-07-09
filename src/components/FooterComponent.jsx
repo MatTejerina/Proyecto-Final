@@ -79,7 +79,7 @@ const Footer = () => {
             </div>
             <div className="logo">
               <a className="text-light" href="../index.html">
-                Digital<span className="titulo-pagina">Vet</span>
+                Rolling<span className="titulo-pagina">Vet</span>
               </a>
             </div>
           </div>

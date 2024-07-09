@@ -1,5 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import NavbarComponent from '../components/NavbarComponent'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import AdminPage from '../pages/AdminPage';
 import HomePage from '../pages/HomePage';
 import AppointmentsPage from '../pages/AppointmentsPage';
@@ -9,6 +8,7 @@ import ContactPage from '../pages/ContactPage';
 import AboutPage from '../pages/AboutPage';
 import ErrorPage from '../pages/ErrorPage';
 import Footer from '../components/FooterComponent';
+import NavbarComponent from '../components/NavbarComponent';
 
 
 const PrivateRouter = ({ user, setUser }) => {

@@ -1,14 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
-import AdminPage from './pages/AdminPage';
-import PatientPage from './pages/PatientPage';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import ErrorPage from './pages/ErrorPage';
-import PlansPage from './pages/PlansPage';
-import RegisterPage from './pages/RegisterPage';
-import NavbarComponent from './components/NavbarComponent';
-import AppointmentsPage from './pages/AppointmentsPage'; import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PrivateRoute from "./routers/PrivateRouter";
 import PublicRoute from "./routers/PublicRouter";
 import { jwtDecode } from 'jwt-decode';

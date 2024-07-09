@@ -11,8 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../assets/Logo.png';
+import { enqueueSnackbar } from 'notistack';
 
 const pages = [{ name: 'Inicio', path: '/homePage' }];
 const settings = [
@@ -59,7 +60,12 @@ function NavbarComponent({ user, setUser }) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* Logo for larger screens */}
+          <Box
+            component="img"
+            src={Logo}
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: 'auto', height: '40px' }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -117,7 +123,12 @@ function NavbarComponent({ user, setUser }) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          {/* Logo for smaller screens */}
+          <Box
+            component="img"
+            src={Logo}
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width: 'auto', height: '40px' }}
+          />
           <Typography
             variant="h5"
             noWrap

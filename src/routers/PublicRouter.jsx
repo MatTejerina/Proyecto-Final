@@ -1,12 +1,12 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
-import NavbarComponent from '../components/NavbarComponent'
 import ErrorPage from '../pages/ErrorPage';
 import RegisterPage from '../pages/RegisterPage';
 import ContactPage from '../pages/ContactPage';
 import AboutPage from '../pages/AboutPage';
 import Footer from '../components/FooterComponent';
+import NavbarComponent from '../components/NavbarComponent';
 
 const PublicRouter = ({ user, setUser }) => {
   return (
