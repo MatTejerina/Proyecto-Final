@@ -1,0 +1,172 @@
+/* Estilos para el contenedor principal */
+.main-section {
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+  }
+  
+  .contenedor {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1020px;
+  }
+  
+  /* Estilos para el formulario */
+  .form-container {
+	flex: 1;
+  }
+  
+  .form-contacto {
+	padding: 1.5rem;
+	background-color: #f2f2f2;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .labelContacto {
+	font-weight: 600;
+	color: #333;
+	font-size: 0.9rem;
+	margin-top: 1rem;
+  }
+  
+  .inputContacto {
+	font-size: 0.8rem;
+	margin: 0.3rem 0 1rem 0;
+	width: calc(100% - 2rem);
+	padding: 0.5rem;
+	background-color: #ccc;
+	border: none;
+	border-radius: 4px;
+	color: black;
+  }
+  
+  .inputContacto-consulta {
+	width: calc(100% - 2rem);
+	margin-bottom: 1rem;
+	border-radius: 4px;
+	height: 5rem;
+	font-size: 0.8rem;
+	background-color: #ccc;
+	border: none;
+	padding: 0.5rem;
+	color: black;
+  }
+  
+  .btnContacto {
+	width: 100%;
+	margin-top: 1rem;
+	padding: 0.7rem;
+	border: none;
+	font-size: 0.9rem;
+	background-color: #3564dc;
+	color: white;
+	border-radius: 4px;
+	cursor: pointer;
+  }
+  
+  .btnContacto:hover {
+	background-color: #2333c8;
+  }
+  
+  /* Estilos para el aside con los planes */
+  .aside-container {
+	flex: 1;
+	margin-left: 1rem;
+  }
+  
+  .plan-container {
+	display: flex;
+	padding: 0;
+	flex-direction: column;
+	height: 100%; /* Ocupa toda la altura del aside */
+  }
+  
+  .plan:first-child {
+	height: 25%; /* Cada plan ocupa 33.33% de la altura */
+  }
+  .plan {
+	padding: 1rem;
+	padding-bottom: 0.2rem;
+	box-sizing: content-box;
+	/* margin-bottom: 1rem; */
+	/* border-radius: 8px; */
+	height: 30%; /* Cada plan ocupa 33.33% de la altura */
+  }
+  
+  .plan h3 {
+	font-size: 1rem;
+	color: white;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+  }
+  
+  .plan p {
+	font-size: 0.75rem;
+	color: #000000;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+  }
+  .plan p:last-child {
+	margin: 0;
+	font-size: 0.9rem;
+	text-align: end;
+  }
+
+  .list-service{
+	font-size: 0.7rem;
+	margin: 0;
+  }
+  
+  .verde {
+	background-color: #28a745;
+  }
+  
+  .azul {
+	background-color: #007bff;
+  }
+  
+  .rojo {
+	background-color: #dc3545;
+	height: 33%;
+  }
+  
+  /* Media queries para dispositivos grandes */
+  @media (min-width: 768px) {
+	.contenedor {
+	  flex-direction: row;
+	}
+  
+	.form-container {
+	  width: 60%;
+	  margin-right: 1rem;
+	}
+  
+	.aside-container {
+	  width: 40%;
+	  margin-left: 0;
+	}
+  
+	.inputContacto,
+	.inputContacto-consulta {
+	  width: calc(100% - 1rem);
+	}
+  }
+  
+  /* Media queries para dispositivos pequeños (celulares) */
+  @media (max-width: 767px) {
+	.form-container,
+	.aside-container {
+	  width: 100%;
+	  margin-left: 0;
+	  margin-right: 0;
+	}
+  
+	.form-contacto {
+	  padding: 1rem;
+	}
+	.plan:first-child {
+		height: 30%; /* Cada plan ocupa 33.33% de la altura */
+	  }
+  }
