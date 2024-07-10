@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import ErrorPage from '../pages/ErrorPage';
 import RegisterPage from '../pages/RegisterPage';
+import PlansPage from '../pages/PlansPage';
 import ContactPage from '../pages/ContactPage';
 import AboutPage from '../pages/AboutPage';
 import Footer from '../components/FooterComponent';
@@ -21,6 +22,7 @@ const PublicRouter = ({ user, setUser }) => {
         <Route path="/contactPage" element={<ContactPage />} />
         <Route path="/aboutPage" element={<AboutPage />} />
         <Route path="/errorPage" element={<ErrorPage />} />
+        <Route path="/plansPage" element={<PlansPage />} />
         <Route path="/*" element={<Navigate to='/errorPage' />} />
       </Routes>
       <Footer />

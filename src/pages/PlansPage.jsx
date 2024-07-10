@@ -31,6 +31,7 @@ const ConsultaPlan = () => {
       to_email: formData.correo, // Aquí asignamos el correo electrónico del destinatario
       to_name: formData.nombreCompleto, // Esto es opcional si lo usas en tu plantilla
       plan: formData.plan, // Pasamos el plan seleccionado
+      consulta: formData.consulta
     };
 
     console.log(templateParams);
