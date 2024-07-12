@@ -2,6 +2,7 @@
 
 import React from 'react';
 import '../styles/Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -48,33 +49,31 @@ const Footer = () => {
             </div>
             <div className="container-about">
               <div className="linea">
-                <a href="./index.html" className="paginas col">
+                <Link to='/' 
+                className="paginas col">
                   Inicio
-                </a>
+                </Link>
               </div>
               <div className="linea">
-                <a
-                  href="./pages/error.html"
+                <Link to='/errorPage'
                   className="paginas col"
                 >
                   Noticias
-                </a>
+                </Link>
               </div>
               <div className="linea">
-                <a
-                  href="./pages/sobreNosotros.html"
+                <Link to='/aboutPage'
                   className="paginas col"
                 >
                   Sobre Nosotros
-                </a>
+                </Link>
               </div>
               <div className="linea">
-                <a
-                  href="./pages/contacto.html"
+                <Link to='contactPage'
                   className="paginas col"
                 >
                   Contáctanos
-                </a>
+                </Link>
               </div>
             </div>
             <div className="logo">

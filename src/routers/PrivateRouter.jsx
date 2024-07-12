@@ -30,7 +30,7 @@ const PrivateRouter = ({ user, setUser }) => {
         <Route path="/homePage" element={<HomePage setUser={setUser} />} />
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/errorPage" element={<ErrorPage />} />
-        <Route path="/*" element={<Navigate to='/errorPage' />} />
+        <Route path="/*" element={<Navigate to='/homePage' />} />
       </Routes>
       <Footer />
     </>
