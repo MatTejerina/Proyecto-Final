@@ -98,7 +98,7 @@ const AdminPage = () => {
       </div>
 
       <h2>Veterinarios</h2>
-      <VeterinarianList onUpdateAppointments={updateAppointments} />
+      <VeterinarianList onUpdateAppointments={updateAppointments}/>
     </Container>
   );
 };

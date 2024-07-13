@@ -22,7 +22,7 @@ const pages = [
 ];
 const settings = [
   { name: 'Administración', path: '/adminPage' },
-  { name: 'Pacientes', path: '/patientPage' },
+  { name: 'Dueños y Mascotas', path: '/patientPage' },
   { name: 'Turnos', path: '/appointmentPage' },
 ];
 
@@ -243,7 +243,7 @@ function NavbarComponent({ user, setUser }) {
             >
               {user.logged ? [
                 ...settings
-                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Pacientes' && setting.name !== 'Turnos')))
+                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Dueños y Mascotas' && setting.name !== 'Turnos')))
                   .map((setting) => (
                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">
