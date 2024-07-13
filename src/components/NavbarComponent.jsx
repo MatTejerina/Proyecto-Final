@@ -21,6 +21,7 @@ const settings = [
   { name: 'Pacientes', path: '/patientPage' },
   { name: 'Turnos', path: '/appointmentPage' },
   { name: 'Iniciar Sesión', path: '/loginPage' },
+  { name: 'Contacto', path: '/contactPage' },
 ];
 
 function NavbarComponent({ user, setUser }) {
@@ -204,6 +205,13 @@ function NavbarComponent({ user, setUser }) {
                   <Typography textAlign="center">
                     <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                       Iniciar Sesión
+                    </Link>
+                  </Typography>
+                </MenuItem>,
+                <MenuItem>
+                  <Typography textAlign="center">
+                    <Link to="/contactPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Contacto
                     </Link>
                   </Typography>
                 </MenuItem>
