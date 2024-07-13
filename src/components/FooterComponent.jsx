@@ -48,13 +48,13 @@ const Footer = () => {
             </div>
             <div className="container-about">
               <div className="linea">
-                <a href="./index.html" className="paginas col">
+                <a href="/*" className="paginas col">
                   Inicio
                 </a>
               </div>
               <div className="linea">
                 <a
-                  href="./pages/error.html"
+                  href="/*"
                   className="paginas col"
                 >
                   Noticias
@@ -62,7 +62,7 @@ const Footer = () => {
               </div>
               <div className="linea">
                 <a
-                  href="./pages/sobreNosotros.html"
+                  href="/*"
                   className="paginas col"
                 >
                   Sobre Nosotros
@@ -70,7 +70,7 @@ const Footer = () => {
               </div>
               <div className="linea">
                 <a
-                  href="./pages/contacto.html"
+                  href="/*"
                   className="paginas col"
                 >
                   Contáctanos

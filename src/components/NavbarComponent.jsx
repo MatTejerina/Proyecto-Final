@@ -105,14 +105,12 @@ function NavbarComponent({ user, setUser }) {
             </Menu>
           </Box>
 
-          <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: { xs: 'center', md: 'flex-start' }, alignItems: 'center' }}>
-            <Box component={Link}
-                to="/homePage" sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+          <Box component={Link}
+                to="/homePage" sx={{ display: 'flex', flexGrow: 1, justifyContent: { xs: 'center', md: 'flex-start' }, alignItems: 'center' }}>
+            <Box  sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
               <Typography
                 variant="h5"
                 noWrap
-                component={Link}
-                to="/homePage"
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
@@ -124,8 +122,6 @@ function NavbarComponent({ user, setUser }) {
                 Rolling
               </Typography>
               <Box
-                component={Link}
-                to="/homePage"
                 sx={{
                   alignItems: 'center',
                   textDecoration: 'none',
@@ -137,9 +133,7 @@ function NavbarComponent({ user, setUser }) {
               </Box>
               <Typography
                 variant="h5"
-                noWrap
-                component={Link}
-                to="/homePage"
+                noWrap              
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
@@ -156,8 +150,6 @@ function NavbarComponent({ user, setUser }) {
               <Typography
                 variant="h5"
                 noWrap
-                component={Link}
-                to="/homePage"
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
@@ -169,8 +161,6 @@ function NavbarComponent({ user, setUser }) {
                 Rolling
               </Typography>
               <Box
-                component={Link}
-                to="/homePage"
                 sx={{
                   alignItems: 'center',
                   textDecoration: 'none',
@@ -183,8 +173,6 @@ function NavbarComponent({ user, setUser }) {
               <Typography
                 variant="h5"
                 noWrap
-                component={Link}
-                to="/homePage"
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
