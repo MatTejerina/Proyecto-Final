@@ -13,7 +13,10 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
+=======
+>>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -25,6 +28,8 @@
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "emailjs": "^4.0.3",
+    "emailjs-com": "^3.2.0",
     "install": "^0.13.0",
     "ionicons": "^7.4.0",
     "jwt-decode": "^4.0.0",
@@ -34,6 +39,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.2.0",
+    "react-fontawesome": "^1.7.1",
     "react-hook-form": "^7.52.1",
     "react-ion-icon": "^4.0.0",
     "react-ionicons": "^4.2.1",

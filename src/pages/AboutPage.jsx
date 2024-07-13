@@ -6,7 +6,7 @@ import { faFacebookSquare, faInstagram, faTwitter } from '@fortawesome/free-bran
 
 const AboutPage = () => {
     return (
-        <div>
+        <div className="about-page">
             <section className="acerca-de-grupal d-flex flex-column align-items-center">
                 <div className="contenedor-objetos d-flex justify-content-center align-items-center">
                     <div className="texto d-flex flex-column align-items-end">
@@ -43,7 +43,7 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="tarjeta col-xl-2 col-lg-3 col-md-4 col-sd-12 m-2">
                     <div className="containe">
                         <div className="card_1">
