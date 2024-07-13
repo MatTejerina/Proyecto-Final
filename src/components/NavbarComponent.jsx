@@ -178,7 +178,7 @@ function NavbarComponent({ user, setUser }) {
                   mx: 0.5,
                 }}
               >
-                <Box component="img" src={Logo} sx={{ width: 'auto', height: '30px' }} />
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
               </Box>
               <Typography
                 variant="h5"
@@ -188,7 +188,7 @@ function NavbarComponent({ user, setUser }) {
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
-                  color: 'blue',
+                  color: 'lightblue',
                   textDecoration: 'none',
                   ml: 0.5,
                 }}
