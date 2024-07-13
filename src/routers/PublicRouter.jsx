@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
+import '../App.css';
 import ErrorPage from '../pages/ErrorPage';
 import RegisterPage from '../pages/RegisterPage';
 import PlansPage from '../pages/PlansPage';

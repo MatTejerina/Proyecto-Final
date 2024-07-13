@@ -15,7 +15,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import { enqueueSnackbar } from 'notistack';
 
-const pages = [{ name: 'Inicio', path: '/homePage' }];
+const pages = [
+  { name: 'Nosotros', path: '/aboutPage' },
+  { name: 'Contacto', path: '/contactPage' },
+  { name: 'Planes', path: '/plansPage' },
+];
 const settings = [
   { name: 'Administración', path: '/adminPage' },
   { name: 'Pacientes', path: '/patientPage' },
@@ -57,36 +61,13 @@ function NavbarComponent({ user, setUser }) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'rgb(8, 39, 66)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo for larger screens */}
-          <Box
-            component="img"
-            src={Logo}
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: 'auto', height: '40px' }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -123,30 +104,89 @@ function NavbarComponent({ user, setUser }) {
               ))}
             </Menu>
           </Box>
-          {/* Logo for smaller screens */}
-          <Box
-            component="img"
-            src={Logo}
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width: 'auto', height: '40px' }}
-          />
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          <Box component={Link}
+                to="/homePage" sx={{ display: 'flex', flexGrow: 1, justifyContent: { xs: 'center', md: 'flex-start' }, alignItems: 'center' }}>
+            <Box  sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 1,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap              
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue', // Cambiar al color del navbar
+                  textDecoration: 'none',
+                  ml: 0,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0.5,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 0.5,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue',
+                  textDecoration: 'none',
+                  ml: 0.5,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', pr: 2 }}>
             {pages.map((page) => (
               <Button
                 key={page.name}

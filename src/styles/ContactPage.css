@@ -1,0 +1,260 @@
+/* Colores: 
+Boton: #1C3144
+Contacto: #011936
+ */
+/* Contact Page Styling */
+.body-contact {
+  font-family: "Poppins", sans-serif;
+}
+
+/*Seccion de formulario*/
+/*Texto de consulta*/
+
+.text-contact p {
+  text-align: center;
+  font-size: 0.7rem;
+  color: black;
+}
+
+.text-contact h2 {
+  text-align: center;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: black;
+}
+
+/*Formulario Titulo*/
+
+.titleForm-contact {
+  font-size: 0.7rem;
+  color: black;
+  font-weight: 700;
+}
+
+/*Formulario contenedor*/
+
+.form-contact {
+  padding: 5.5%;
+  background-color: #ECF8F8;
+  border-radius: 8px;
+}
+
+/*Formulario inputs y labels*/
+.labelContact {
+  font-weight: 600;
+  color: #011936;
+  font-size: 0.7rem;
+}
+
+.inputContact {
+  font-size: 0.7rem;
+  margin: 0.3rem 0 0.4rem 1%;
+  width: 97%;
+  padding: 0.2rem;
+  border: none;
+  border-radius: 4px;
+  color: black;
+}
+
+.inputContact-consulta {
+  width: 97%;
+  margin: 0.4rem 0 0.4rem 1%;
+  border-radius: 0.5rem;
+  height: 5rem;
+  font-size: 0.7rem;
+  background-color: #ccc;
+  border: none;
+  border-radius: 4px;
+  color: black;
+}
+
+.footerForm-contact {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.btnContact {
+  width: 100%;
+  margin: 0 auto;
+  border: none;
+  font-size: 0.8rem;
+  background-color: #1C3144;
+  color: #ccc;
+}
+
+/*Contacto celular y email*/
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
+  font-size: 0.7rem;
+  margin-top: 5rem;
+}
+
+.element-contact {
+  background-color: #011936;
+  border: 3px solid #011936;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  padding-top: 0.9%;
+  margin-bottom: 1rem;
+  /* Espaciado entre elementos de contacto */
+}
+
+.element-contact:first-child {
+  margin-left: 0;
+}
+
+.element-contact h3 {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.element-contact a {
+  text-decoration: none;
+}
+
+.text-infoContact {
+  width: 70%;
+  color: #ccc;
+}
+
+.text-infoContact p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.logo-infoContact {
+  display: flex;
+}
+
+.fa {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.rightSide {
+  height: 60%;
+}
+
+@media (min-width: 768px) {
+
+  .rightSide {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .leftSide {
+    flex-direction: column;
+    width: 100%;
+    height: 70%;
+    margin-top: 10vw;
+  }
+
+  .labelContact {
+    font-size: 0.7rem;
+  }
+
+  .text-contact p {
+    font-size: 0.9rem;
+  }
+
+  .text-contact h2 {
+    font-size: 1rem;
+  }
+
+  .inputContact {
+    font-size: 0.7rem;
+  }
+
+  .inputContact-consulta {
+    font-size: 0.7rem;
+  }
+
+  .element-contact {
+    font-size: 0.9rem;
+    width: 80%;
+    /* Incrementar el ancho */
+    height: 20%;
+    border-radius: 8px;
+    margin-top: 5vw;
+    margin-left: 10vw;
+    /* Ajustar el margen izquierdo */
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+
+    /* Definición del borde irregular */
+  }
+
+  .element-contact:first-child {
+    margin-left: 10vw;
+  }
+
+  .text-infoContact h3 {
+    font-size: 0.9rem;
+  }
+
+  .fa {
+    font-size: 1.7rem;
+  }
+}
+
+@media(min-width:1020px) {
+  .leftSide {
+    flex-direction: column;
+    width: 70%;
+    height: 70%;
+  }
+
+  .labelContact {
+    font-size: 1rem;
+  }
+
+  .text-contact p {
+    font-size: 1.2rem;
+  }
+
+  .text-contact h2 {
+    font-size: 1.3rem;
+  }
+
+  .inputContact {
+    font-size: 1rem;
+  }
+
+  .inputContact-consulta {
+    font-size: 1rem;
+  }
+
+  .btnContact {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .element-contact:first-child {
+    margin-top: 0;
+  }
+
+  .element-contact {
+    width: 100%;
+  }
+
+  .text-infoContact h3 {
+    font-size: 1rem;
+  }
+
+  .text-infoContact p {
+    font-size: 1rem;
+  }
+
+  .fa {
+    font-size: 2rem;
+  }
+}

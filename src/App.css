@@ -1,14 +1,4 @@
-.loginForm {
-  max-width: 40%;
-  margin: 5% auto;
-  padding: 1rem;
-  text-align: center;
-  background-color: #808080;
-  border-radius: 24px;
-}
-
-
-.link {
-  text-decoration: none;
-  color: #000;
+.app{
+  position: relative;
+  min-height: 100vh;
 }
