@@ -24,7 +24,6 @@ const settings = [
   { name: 'Administración', path: '/adminPage' },
   { name: 'Pacientes', path: '/patientPage' },
   { name: 'Turnos', path: '/appointmentPage' },
-  { name: 'Iniciar Sesión', path: '/loginPage' },
 ];
 
 function NavbarComponent({ user, setUser }) {
@@ -102,6 +101,15 @@ function NavbarComponent({ user, setUser }) {
                   </Typography>
                 </MenuItem>
               ))}
+              {!user.logged && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Iniciar Sesión
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
 
@@ -191,19 +199,30 @@ function NavbarComponent({ user, setUser }) {
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
               >
                 <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                   {page.name}
                 </Link>
               </Button>
             ))}
+            {!user.logged && (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
+              >
+                <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  Iniciar Sesión
+                </Link>
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Menu">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} 
+              sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}>
+                {user.logged ? "MENU" : ""}
               </IconButton>
             </Tooltip>
             <Menu

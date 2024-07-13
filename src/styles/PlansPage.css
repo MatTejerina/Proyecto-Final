@@ -56,19 +56,19 @@
   }
   
   .btnContacto {
-	width: 100%;
+	width: 97%;
 	margin-top: 1rem;
 	padding: 0.7rem;
 	border: none;
 	font-size: 0.9rem;
-	background-color: #3564dc;
+	background-color: #172957;
 	color: white;
 	border-radius: 4px;
 	cursor: pointer;
   }
   
   .btnContacto:hover {
-	background-color: #2333c8;
+	background-color: #d32741;
   }
   
   /* Estilos para el aside con los planes */
