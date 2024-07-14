@@ -2,13 +2,14 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { enqueueSnackbar } from 'notistack';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import '../styles/LoginPage.css'
+import '../styles/LoginPage.css';
 
 const DATABASE_URL = 'http://localhost:4500';
 
 const LoginPage = ({ setUser }) => {
+  const navigate = useNavigate();
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -38,40 +39,44 @@ const LoginPage = ({ setUser }) => {
       isAdmin: loginData.isAdmin
     })
 
-    window.location.href = '/homePage'
+    navigate('/homePage')
   };
 
 
   return (
     <>
-      <Form className='loginForm' onSubmit={handleSubmit((data) => onSubmit(data))}>
-        <Form.Group className="mb-2" controlId="Form.Controlemail">
-          <Form.Label>Direccion de Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="name@google.com"
-            autoFocus
-            {...register('email', { required: 'Este campo es obligatorio' })}
-            isInvalid={!!errors.email}
-          />
-          <Form.Control.Feedback type='invalid'>{errors.email?.message}</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="Form.Controlpassword">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="*******"
-            {...register('password', { required: 'Este campo es obligatorio' })}
-            isInvalid={!!errors.password}
-          />
-          <Form.Control.Feedback type='invalid'>{errors.password?.message}</Form.Control.Feedback>
+      <div className='body-login'>
+        <Form className='loginForm' onSubmit={handleSubmit((data) => onSubmit(data))}>
+          <Form.Group className="mb-2" controlId="Form.Controlemail">
+            <Form.Label className='labelLogin '>Direccion de Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="name@google.com"
+              autoFocus
+              {...register('email', { required: 'Este campo es obligatorio' })}
+              isInvalid={!!errors.email}
+              className='inputLogin'
+            />
+            <Form.Control.Feedback type='invalid'>{errors.email?.message}</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="Form.Controlpassword">
+            <Form.Label className='labelLogin '>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="*******"
+              {...register('password', { required: 'Este campo es obligatorio' })}
+              isInvalid={!!errors.password}
+              className='inputLogin'
+            />
+            <Form.Control.Feedback type='invalid'>{errors.password?.message}</Form.Control.Feedback>
 
-        </Form.Group>
-        <Button variant="primary" type='submit'>
-          Iniciar Sesion
-        </Button>
-        <p className='text-dark m-0'>No tienes una cuenta? <Link to='/errorPage'> Registrarse</Link></p>
-      </Form>
+          </Form.Group>
+          <Button className='btnLogin ' variant="primary" type='submit'>
+            Iniciar Sesion
+          </Button>
+          <p className='text-dark m-0'>No tienes una cuenta? <Link className='links' to='/errorPage'> Registrarse</Link></p>
+        </Form>
+      </div>
     </>
   );
 }

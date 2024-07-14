@@ -7,7 +7,7 @@ const ContactPage = () => {
     <div className="body-contact">
       <Container className="main-section">
         <Row>
-          <Col md={6}>
+          <Col >
             <div className="rightSide">
               <div className="text-contact">
                 <h2>¿En qué podemos ayudarte?</h2>
@@ -68,8 +68,7 @@ const ContactPage = () => {
               </div>
             </div>
           </Col>
-
-          <Col md={6}>
+          <Col >
             <div className="leftSide">
               <div className="element-contact small-element-contact">
                 <div className="logo-infoContact">
@@ -94,13 +93,7 @@ const ContactPage = () => {
                   <h4>¿Dónde encontrarnos?</h4>
                   <h6>Gral. José de San Martín 839</h6>
                 </div>
-                <iframe
-                  className="mapa"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.3558706111994!2d-65.20947629999999!3d-26.8286312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c13f1ceb33d%3A0xbb344eb482b6ff14!2sGral.%20Jos%C3%A9%20de%20San%20Mart%C3%ADn%20839%2C%20T4000%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1702159721683!5m2!1ses-419!2sar"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                <iframe className='mapa' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14241.424387574643!2d-65.209492!3d-26.828624!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c13f1ceb33d%3A0xbb344eb482b6ff14!2sGral.%20Jos%C3%A9%20de%20San%20Mart%C3%ADn%20839%2C%20T4000%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1720969682550!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </Col>
