@@ -5,11 +5,16 @@ Contacto: #011936
 /* Contact Page Styling */
 .body-contact {
   font-family: "Poppins", sans-serif;
+  background-image: url('../assets/Fondo_contacto.jpg');
+  background-size: cover;
+  background-position: center;
+  /* Centra la imagen */
+  background-repeat: no-repeat;
+  padding: 20px 0;
 }
 
-/*Seccion de formulario*/
-/*Texto de consulta*/
-
+/* Seccion de formulario */
+/* Texto de consulta */
 .text-contact p {
   text-align: center;
   font-size: 0.7rem;
@@ -23,23 +28,24 @@ Contacto: #011936
   color: black;
 }
 
-/*Formulario Titulo*/
-
+/* Formulario Titulo */
 .titleForm-contact {
   font-size: 0.7rem;
   color: black;
   font-weight: 700;
 }
 
-/*Formulario contenedor*/
-
+/* Formulario contenedor */
 .form-contact {
   padding: 5.5%;
   background-color: #ECF8F8;
   border-radius: 8px;
+  margin: 0 auto;
+  max-width: 600px;
+  /* Nueva regla para limitar el ancho máximo */
 }
 
-/*Formulario inputs y labels*/
+/* Formulario inputs y labels */
 .labelContact {
   font-weight: 600;
   color: #011936;
@@ -83,14 +89,13 @@ Contacto: #011936
   color: #ccc;
 }
 
-/*Contacto celular y email*/
+/* Contacto celular y email */
 .leftSide {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 40%;
+  height: 100%;
   font-size: 0.7rem;
-  margin-top: 5rem;
 }
 
 .element-contact {
@@ -101,8 +106,7 @@ Contacto: #011936
   text-align: center;
   justify-content: center;
   width: 100%;
-  height: 60%;
-  padding-top: 0.9%;
+  padding: 1rem;
   margin-bottom: 1rem;
   /* Espaciado entre elementos de contacto */
 }
@@ -140,21 +144,19 @@ Contacto: #011936
 }
 
 .rightSide {
-  height: 60%;
+  width: 100%;
+  height: 100%;
+}
+
+.mapa {
+  border: 0;
+  width: 100%;
+  height: 200px;
 }
 
 @media (min-width: 768px) {
-
   .rightSide {
-    flex-direction: column;
     width: 100%;
-  }
-
-  .leftSide {
-    flex-direction: column;
-    width: 100%;
-    height: 70%;
-    margin-top: 10vw;
   }
 
   .labelContact {
@@ -179,22 +181,22 @@ Contacto: #011936
 
   .element-contact {
     font-size: 0.9rem;
-    width: 80%;
+    width: 100%;
     /* Incrementar el ancho */
-    height: 20%;
     border-radius: 8px;
-    margin-top: 5vw;
-    margin-left: 10vw;
+    margin-left: auto;
+    margin-right: auto;
     /* Ajustar el margen izquierdo */
     border-top: 2px solid white;
     border-bottom: 2px solid white;
     clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
-
+    border: 3px solid #011936;
+    padding: 0.5rem;
     /* Definición del borde irregular */
   }
 
   .element-contact:first-child {
-    margin-left: 10vw;
+    margin-left: auto;
   }
 
   .text-infoContact h3 {
@@ -204,9 +206,18 @@ Contacto: #011936
   .fa {
     font-size: 1.7rem;
   }
+
+  .content {
+    margin-left: 5vw;
+  }
+
+  .mapa {
+    width: 300px;
+    height: 200px;
+  }
 }
 
-@media(min-width:1020px) {
+@media(min-width: 1020px) {
   .leftSide {
     flex-direction: column;
     width: 70%;
@@ -256,5 +267,14 @@ Contacto: #011936
 
   .fa {
     font-size: 2rem;
+  }
+
+  .content {
+    margin-left: 5vw;
+  }
+
+  .mapa {
+    width: 400px;
+    height: 200px;
   }
 }
