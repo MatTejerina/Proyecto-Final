@@ -34,7 +34,7 @@ const PatientPage = () => {
   useEffect(() => {
     getUsers();
   }, []);
-//traer lista de ususarios
+  //traer lista de ususarios
   const getUsers = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`);
@@ -46,7 +46,7 @@ const PatientPage = () => {
   };
 
   const handleUserClick = (user) => setSelectedUser(user);
-//agregar usuarios
+  //agregar usuarios
   const handleAddUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`, {
@@ -74,7 +74,7 @@ const PatientPage = () => {
       console.error("Error al agregar usuario:", error);
     }
   };
-//editar ususarios
+  //editar ususarios
   const handleEditUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
@@ -102,7 +102,7 @@ const PatientPage = () => {
       console.error("Error al editar usuario:", error);
     }
   };
-//eliminar usuarios
+  //eliminar usuarios
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${userId}`, { method: 'DELETE' });
@@ -128,7 +128,7 @@ const PatientPage = () => {
   };
 
   return (
-    <Container>
+    <Container className='mb-3'>
       <Row className="mt-3">
         <Col>
           <h2 className="text-center">Lista de Dueños y Mascotas</h2>

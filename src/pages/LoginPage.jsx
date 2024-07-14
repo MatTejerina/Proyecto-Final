@@ -10,13 +10,11 @@ const DATABASE_URL = 'http://localhost:4500';
 
 const LoginPage = ({ setUser }) => {
   const navigate = useNavigate();
-
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = async (data) => {
     const response = await fetch(`${DATABASE_URL}/login`, {
       method: 'POST',
-      // credentials: 'include',
       headers: {
         'Content-Type': ' application/json'
       },
@@ -38,7 +36,6 @@ const LoginPage = ({ setUser }) => {
       logged: true,
       isAdmin: loginData.isAdmin
     })
-
     navigate('/homePage')
   };
 
