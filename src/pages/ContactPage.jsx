@@ -62,7 +62,7 @@ const ContactPage = () => {
                       required
                     />
                   </Form.Group>
-                  <Button variant="outline-danger" type="submit" className="btnContact">
+                  <Button variant="outline-danger" type="submit" className="btnContact mt-2">
                     Enviar
                   </Button>
                 </Form>

@@ -15,13 +15,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import { enqueueSnackbar } from 'notistack';
 
-const pages = [{ name: 'Inicio', path: '/homePage' }];
+const pages = [
+  { name: 'Nosotros', path: '/aboutPage' },
+  { name: 'Contacto', path: '/contactPage' },
+  { name: 'Planes', path: '/plansPage' },
+];
 const settings = [
   { name: 'Administración', path: '/adminPage' },
-  { name: 'Pacientes', path: '/patientPage' },
+  { name: 'Dueños y Mascotas', path: '/patientPage' },
   { name: 'Turnos', path: '/appointmentPage' },
-  { name: 'Iniciar Sesión', path: '/loginPage' },
-  { name: 'Contacto', path: '/contactPage' },
 ];
 
 function NavbarComponent({ user, setUser }) {
@@ -58,36 +60,13 @@ function NavbarComponent({ user, setUser }) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: 'rgb(8, 39, 66)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo for larger screens */}
-          <Box
-            component="img"
-            src={Logo}
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, width: 'auto', height: '40px' }}
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -122,49 +101,128 @@ function NavbarComponent({ user, setUser }) {
                   </Typography>
                 </MenuItem>
               ))}
+              {!user.logged && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Iniciar Sesión
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
-          {/* Logo for smaller screens */}
-          <Box
-            component="img"
-            src={Logo}
-            sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, width: 'auto', height: '40px' }}
-          />
-          <Typography
-            variant="h5"
-            noWrap
-            component="div"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          <Box component={Link}
+                to="/homePage" sx={{ display: 'flex', flexGrow: 1, justifyContent: { xs: 'center', md: 'flex-start' }, alignItems: 'center' }}>
+            <Box  sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 1,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap              
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue', // Cambiar al color del navbar
+                  textDecoration: 'none',
+                  ml: 0,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0.5,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 0.5,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue',
+                  textDecoration: 'none',
+                  ml: 0.5,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', pr: 2 }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
               >
                 <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                   {page.name}
                 </Link>
               </Button>
             ))}
+            {!user.logged && (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
+              >
+                <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  Iniciar Sesión
+                </Link>
+              </Button>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Menu">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} 
+              sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}>
+                {user.logged ? "MENU" : ""}
               </IconButton>
             </Tooltip>
             <Menu
@@ -185,7 +243,7 @@ function NavbarComponent({ user, setUser }) {
             >
               {user.logged ? [
                 ...settings
-                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Pacientes' && setting.name !== 'Turnos')))
+                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Dueños y Mascotas' && setting.name !== 'Turnos')))
                   .map((setting) => (
                     <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center">
@@ -205,13 +263,6 @@ function NavbarComponent({ user, setUser }) {
                   <Typography textAlign="center">
                     <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                       Iniciar Sesión
-                    </Link>
-                  </Typography>
-                </MenuItem>,
-                <MenuItem>
-                  <Typography textAlign="center">
-                    <Link to="/contactPage" style={{ textDecoration: 'none', color: 'inherit' }}>
-                      Contacto
                     </Link>
                   </Typography>
                 </MenuItem>

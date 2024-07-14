@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AdminPage from '../pages/AdminPage';
+import '../App.css';
 import HomePage from '../pages/HomePage';
 import AppointmentsPage from '../pages/AppointmentsPage';
 import PatientPage from '../pages/PatientPage';
@@ -29,7 +30,9 @@ const PrivateRouter = ({ user, setUser }) => {
       "/adminPage",
       "/errorPage",
       "/plansPage",
+      "/aboutPage",
       "/appointmentPage"
+
       // Add other valid routes as needed
     ];
 
@@ -51,7 +54,6 @@ const PrivateRouter = ({ user, setUser }) => {
             <Route path="/plansPage" element={<PlansPage />} />
             <Route path="/contactPage" element={<ContactPage />} />
             <Route path="/aboutPage" element={<AboutPage />} />
-
             <Route path="/homePage" element={<HomePage setUser={setUser} />} />
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/errorPage" element={<ErrorPage />} />
