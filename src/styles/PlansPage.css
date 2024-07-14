@@ -1,5 +1,9 @@
 /* Estilos para el contenedor principal */
-.main-section {
+.main-content {
+	justify-content: center;
+	align-content: center;
+  }
+  .main-section {
 	display: flex;
 	justify-content: center;
 	align-content: center;

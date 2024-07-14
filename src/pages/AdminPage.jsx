@@ -72,7 +72,7 @@ const AdminPage = () => {
   };
 
   return (
-    <Container>
+    <Container className='admin-page-content'>
       <div className='text-center'>
         <h1>Página de Administración</h1>
         <p className="lead">Bienvenido, Administrador</p>

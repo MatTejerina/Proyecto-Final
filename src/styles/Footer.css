@@ -13,7 +13,7 @@ a {
 .footer {
   background-color: rgb(52, 60, 63);
   color: #ccc;
-  position: absolute;
+  position: relative;
   padding: 0;
   bottom: 0;
   width: 100%;
