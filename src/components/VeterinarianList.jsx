@@ -3,7 +3,7 @@ import { Button, Table } from 'react-bootstrap';
 import VeterinarianFormModal from './VeterinarianFormModal';
 import ConfirmationModal from './ConfirmationModal';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const VeterinarianList = ({ onUpdateAppointments }) => {
   const [veterinarians, setVeterinarians] = useState([]);

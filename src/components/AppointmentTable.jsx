@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import UpdateAppointmentModal from './UpdateAppointmentModal';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 function AppointmentTable({ appointmentsUpdated }) {
   const [appointments, setAppointments] = useState([]);

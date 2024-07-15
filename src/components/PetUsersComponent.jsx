@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ListGroup, Button, Modal, Form } from 'react-bootstrap';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const PetUsersComponent = ({ userId }) => {
   const [userPets, setUserPets] = useState([]);

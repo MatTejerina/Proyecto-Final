@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, ListGroup, Card, Button, Modal, Form } from 'react-bootstrap';
 import PetUsersComponent from '../components/PetUsersComponent';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const PatientPage = () => {
   const [users, setUsers] = useState([]);
