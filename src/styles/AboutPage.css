@@ -2,7 +2,7 @@
     font-family: "Poppins", sans-serif;
     overflow: hidden;
     min-height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(255, 254, 254, 0.929), rgba(0, 0, 0, 0)), url("../assets/Fondo_about.jpg");
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 0.217)), url("../assets/Fondo_about.jpg");
     background-position: center;
     background-size: cover;
     height: 100%;
@@ -152,7 +152,33 @@
     transform-style: preserve-3d;
     transition: transform 1s;
 }
-
+.agostina {
+    background: url(../assets/Agostina.jpeg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.matias {
+    background: url(../assets/Matias.jpg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.tobias {
+    background: url(../assets/Tobias.jpeg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
 .card_1 .front {
     backface-visibility: hidden;
     height: 500px;
@@ -227,7 +253,7 @@
 .card_1:hover .card_inner {
     transform: rotateY(-180deg);
     border-radius: 20px;
-    box-shadow: 0px 10px 250px 15px rgba(0, 88, 159, 0.548);
+    box-shadow: 0px 10px 250px 15px rgba(0, 50, 115, 0.463);
 }
 
 .card_1 .social .icon:hover {
