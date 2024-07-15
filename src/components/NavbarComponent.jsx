@@ -1,13 +1,278 @@
-import React from 'react'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { Link, useNavigate } from 'react-router-dom';
+import Logo from '../assets/Logo.png';
+import { enqueueSnackbar } from 'notistack';
 
-const NavbarComponent = () => {
+const pages = [
+  { name: 'Nosotros', path: '/aboutPage' },
+  { name: 'Contacto', path: '/contactPage' },
+  { name: 'Planes', path: '/plansPage' },
+];
+const settings = [
+  { name: 'Administración', path: '/adminPage' },
+  { name: 'Dueños y Mascotas', path: '/patientPage' },
+  { name: 'Turnos', path: '/appointmentPage' },
+];
+
+function NavbarComponent({ user, setUser }) {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    setUser({
+      token: null,
+      userInfo: null,
+      logged: false,
+      isAdmin: false
+    });
+    navigate('/loginPage');
+    enqueueSnackbar('Se cerró la sesión', { variant: 'success' });
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <div>NavbarComponent
-      El navbar debe mostrar el logo de la empresa, el botón de login para los usuarios con los permisos
-suficientes, solo en el caso de ser administradores además se deberá mostrar las opciones para administrar
-pacientes y turnos. El resto de opciones necesarias se deja a criterio del equipo de desarrolladores.
-    </div>
-  )
+    <AppBar position="static" sx={{ backgroundColor: 'rgb(8, 39, 66)' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+            <IconButton
+              size="large"
+              aria-label="menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {page.name}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
+              {!user.logged && (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Iniciar Sesión
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
+            </Menu>
+          </Box>
+
+          <Box component={Link}
+                to="/homePage" sx={{ display: 'flex', flexGrow: 1, justifyContent: { xs: 'center', md: 'flex-start' }, alignItems: 'center' }}>
+            <Box  sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 1,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap              
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue', // Cambiar al color del navbar
+                  textDecoration: 'none',
+                  ml: 0,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  mr: 0.5,
+                }}
+              >
+                Rolling
+              </Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  mx: 0.5,
+                }}
+              >
+                <Box component="img" src={Logo} sx={{ width: 'auto', height: '40px' }} />
+              </Box>
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  color: 'lightblue',
+                  textDecoration: 'none',
+                  ml: 0.5,
+                }}
+              >
+                Vet
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', pr: 2 }}>
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
+              >
+                <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  {page.name}
+                </Link>
+              </Button>
+            ))}
+            {!user.logged && (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
+              >
+                <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  Iniciar Sesión
+                </Link>
+              </Button>
+            )}
+          </Box>
+
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Menu">
+              <IconButton onClick={handleOpenUserMenu} 
+              sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}>
+                {user.logged ? "MENU" : ""}
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {user.logged ? [
+                ...settings
+                  .filter(setting => setting.name !== 'Iniciar Sesión' && (user.isAdmin || (!user.isAdmin && setting.name !== 'Administración' && setting.name !== 'Dueños y Mascotas' && setting.name !== 'Turnos')))
+                  .map((setting) => (
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">
+                        <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          {setting.name}
+                        </Link>
+                      </Typography>
+                    </MenuItem>
+                  )),
+                <MenuItem key="Cerrar Sesión" onClick={handleLogOut}>
+                  <Typography textAlign="center">
+                    Cerrar Sesión
+                  </Typography>
+                </MenuItem>
+              ] : [
+                <MenuItem key="Iniciar Sesión" onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link to="/loginPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      Iniciar Sesión
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ]}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
 
-export default NavbarComponent
+export default NavbarComponent;

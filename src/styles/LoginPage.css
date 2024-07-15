@@ -1,0 +1,50 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.loginForm {
+  max-width: 50%;
+  margin: 5% auto;
+  padding: 1rem;
+  background-color: #ECF8F8;
+  border-radius: 24px;
+}
+
+.links {
+  text-decoration: none;
+  color: #1C3144;
+  font-family: sans-serif;
+  font-size: medium;
+  font-weight: 700;
+}
+
+.body-login {
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  min-height: 100vh;
+  background-image: url("https://img.freepik.com/foto-gratis/prueba-medica-visita-al-veterinario_329181-10381.jpg?w=740&t=st=1720969058~exp=1720969658~hmac=3305a5db194668e6250683846a7c74a26b01fda31dacdbb0ff06901af133d515");
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.labelLogin {
+  color: #011936;
+}
+
+.inputLogin {
+  margin: 0.3rem 0 0.4rem 1%;
+  width: 97%;
+  padding: 0.2rem;
+  border-radius: 4px;
+  color: black;
+}
+
+.btnLogin,
+.btnLogin:hover {
+  background-color: #1C3144;
+  color: white;
+  border-color: #1C3144;
+  /* Cambiar el color del borde si es necesario */
+}
