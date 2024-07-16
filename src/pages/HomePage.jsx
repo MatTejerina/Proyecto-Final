@@ -64,25 +64,26 @@ const HomePage = () => {
       <Carousel data-bs-theme="light">
         <Carousel.Item>
           <img
-            className="img"
+            className="img-fluid"
             src='https://mir-s3-cdn-cf.behance.net/project_modules/1400/1b6b09201292311.6671e57c80844.jpg'
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item className='carousel-item'>
           <img
-            className="img"
+            className="img-fluid"
             src='https://cosycat.cl/cdn/shop/files/BANNER_c22abbe6-d131-4fb7-a644-a15fd9494886.png?v=1719354405&width=3840'
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item className='carousel-item'>
           <img
-            className="img"
+            className="img-fluid"
             alt="Third slide"
             src='https://www.increibles.com.uy/wp-content/uploads/2023/07/slide1-2-1.png'
           />
         </Carousel.Item>
+
       </Carousel>
       <Container fluid>
         <Row className="align-items-center">

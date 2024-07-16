@@ -1,12 +1,13 @@
 .carousel-item {
-  height: calc(100vh - 50px);
+  /* height: calc(100vh - 50px); */
   /* Ajusta 50px según el espacio que necesiten los puntos de paginación */
   overflow: hidden;
 }
 
 .carousel-item img {
   width: 100vw;
-  height: calc(100vh - 50px);
+  height: 40vw;
+  /* height: calc(100vh - 50px); */
   /* Ajusta 50px según el espacio que necesiten los puntos de paginación */
   object-fit: cover;
 }
