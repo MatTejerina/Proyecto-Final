@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, ListGroup, Card, Button, Modal, Form } from 'react-bootstrap';
 import PetUsersComponent from '../components/PetUsersComponent';
+import { useSnackbar } from 'notistack';
 
 const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const PatientPage = () => {
+  const { enqueueSnackbar } = useSnackbar(); // Agregar esta línea
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -30,11 +32,13 @@ const PatientPage = () => {
     password: '',
     isAdmin: false
   });
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     getUsers();
   }, []);
-  //traer lista de ususarios
+
   const getUsers = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`);
@@ -46,63 +50,68 @@ const PatientPage = () => {
   };
 
   const handleUserClick = (user) => setSelectedUser(user);
-  //agregar usuarios
+
   const handleAddUser = async () => {
-    try {
-      const response = await fetch(`${DATABASE_URL}/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(addFormValues)
-      });
-      if (response.ok) {
-        getUsers();
-        setShowAddModal(false);
-        setAddFormValues({
-          firstName: '',
-          lastName: '',
-          email: '',
-          address: '',
-          dni: '',
-          phone: '',
-          password: '',
-          isAdmin: false
+    if (validateForm(addFormValues)) {
+      try {
+        const response = await fetch(`${DATABASE_URL}/users`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(addFormValues)
         });
-      } else {
-        console.error("Error al agregar usuario");
+        if (response.ok) {
+          getUsers();
+          setShowAddModal(false);
+          setAddFormValues({
+            firstName: '',
+            lastName: '',
+            email: '',
+            address: '',
+            dni: '',
+            phone: '',
+            password: '',
+            isAdmin: false
+          });
+          enqueueSnackbar('Usuario creado con éxito', { variant: 'success' }); // Agregar esta línea
+        } else {
+          console.error("Error al agregar usuario");
+        }
+      } catch (error) {
+        console.error("Error al agregar usuario:", error);
       }
-    } catch (error) {
-      console.error("Error al agregar usuario:", error);
     }
   };
-  //editar ususarios
+
   const handleEditUser = async () => {
-    try {
-      const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editFormValues)
-      });
-      if (response.ok) {
-        getUsers();
-        setShowEditModal(false);
-        setEditFormValues({
-          firstName: '',
-          lastName: '',
-          email: '',
-          address: '',
-          dni: '',
-          phone: '',
-          password: '',
-          isAdmin: false
+    if (validateForm(editFormValues)) {
+      try {
+        const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(editFormValues)
         });
-      } else {
-        console.error("Error al editar usuario");
+        if (response.ok) {
+          getUsers();
+          setShowEditModal(false);
+          setEditFormValues({
+            firstName: '',
+            lastName: '',
+            email: '',
+            address: '',
+            dni: '',
+            phone: '',
+            password: '',
+            isAdmin: false
+          });
+        } else {
+          console.error("Error al editar usuario");
+        }
+      } catch (error) {
+        console.error("Error al editar usuario:", error);
       }
-    } catch (error) {
-      console.error("Error al editar usuario:", error);
     }
   };
-  //eliminar usuarios
+
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${userId}`, { method: 'DELETE' });
@@ -125,6 +134,42 @@ const PatientPage = () => {
   const handleShowPetsModal = (user) => {
     setSelectedUser(user);
     setShowPetsModal(true);
+  };
+
+  const validateForm = (values) => {
+    let errors = {};
+    if (!values.firstName) {
+      errors.firstName = "El nombre es obligatorio";
+    } else if (!/^[a-zA-Z\s]+$/.test(values.firstName)) {
+      errors.firstName = "El nombre solo puede contener letras";
+    }
+    if (!values.lastName) {
+      errors.lastName = "El apellido es obligatorio";
+    } else if (!/^[a-zA-Z\s]+$/.test(values.lastName)) {
+      errors.lastName = "El apellido solo puede contener letras";
+    }
+    if (!values.email) {
+      errors.email = "El email es obligatorio";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = "El email no es válido";
+    }
+    if (!values.dni) {
+      errors.dni = "El DNI es obligatorio";
+    } else if (!/^\d+$/.test(values.dni)) {
+      errors.dni = "El DNI solo puede contener números";
+    }
+    if (!values.phone) {
+      errors.phone = "El teléfono es obligatorio";
+    } else if (!/^\d+$/.test(values.phone)) {
+      errors.phone = "El teléfono solo puede contener números";
+    }
+    if (!values.password) {
+      errors.password = "La contraseña es obligatoria";
+    } else if (values.password.length < 6 || values.password.length > 20) {
+      errors.password = "La contraseña debe tener entre 6 y 20 caracteres";
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   return (
@@ -185,34 +230,96 @@ const PatientPage = () => {
           <Form>
             <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="firstName" value={addFormValues.firstName} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="firstName" 
+                value={addFormValues.firstName} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.firstName} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.firstName}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Apellido</Form.Label>
-              <Form.Control type="text" name="lastName" value={addFormValues.lastName} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="lastName" 
+                value={addFormValues.lastName} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.lastName} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.lastName}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" name="email" value={addFormValues.email} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="email" 
+                name="email" 
+                value={addFormValues.email} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.email} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.email}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Direccion</Form.Label>
-              <Form.Control type="text" name="address" value={addFormValues.address} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="address" 
+                value={addFormValues.address} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                required 
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>DNI</Form.Label>
-              <Form.Control type="text" name="dni" value={addFormValues.dni} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="dni" 
+                value={addFormValues.dni} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.dni} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.dni}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Telefono</Form.Label>
-              <Form.Control type="text" name="phone" value={addFormValues.phone} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="phone" 
+                value={addFormValues.phone} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.phone} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.phone}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" name="password" value={addFormValues.password} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Control 
+                type="password" 
+                name="password" 
+                value={addFormValues.password} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+                isInvalid={!!formErrors.password} 
+                required 
+                minLength="6" 
+                maxLength="20"
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.password}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
-              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={addFormValues.isAdmin} onChange={(e) => handleFormChange(e, setAddFormValues)} />
+              <Form.Check 
+                type="checkbox" 
+                label="Admin" 
+                name="isAdmin" 
+                checked={addFormValues.isAdmin} 
+                onChange={(e) => handleFormChange(e, setAddFormValues)} 
+              />
             </Form.Group>
             <Button variant="primary" onClick={handleAddUser}>Agregar</Button>
           </Form>
@@ -228,34 +335,82 @@ const PatientPage = () => {
           <Form>
             <Form.Group>
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" name="firstName" value={editFormValues.firstName} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="firstName" 
+                value={editFormValues.firstName} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                isInvalid={!!formErrors.firstName} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.firstName}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Apellido</Form.Label>
-              <Form.Control type="text" name="lastName" value={editFormValues.lastName} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="lastName" 
+                value={editFormValues.lastName} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                isInvalid={!!formErrors.lastName} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.lastName}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" name="email" value={editFormValues.email} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="email" 
+                name="email" 
+                value={editFormValues.email} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                isInvalid={!!formErrors.email} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.email}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Direccion</Form.Label>
-              <Form.Control type="text" name="address" value={editFormValues.address} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="address" 
+                value={editFormValues.address} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                required 
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>DNI</Form.Label>
-              <Form.Control type="text" name="dni" value={editFormValues.dni} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="dni" 
+                value={editFormValues.dni} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                isInvalid={!!formErrors.dni} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.dni}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>Telefono</Form.Label>
-              <Form.Control type="text" name="phone" value={editFormValues.phone} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Control 
+                type="text" 
+                name="phone" 
+                value={editFormValues.phone} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+                isInvalid={!!formErrors.phone} 
+                required 
+              />
+              <Form.Control.Feedback type="invalid">{formErrors.phone}</Form.Control.Feedback>
             </Form.Group>
-            {/* <Form.Group>
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control type="password" name="password" value={editFormValues.password} onChange={(e) => handleFormChange(e, setEditFormValues)} />
-            </Form.Group> */}
             <Form.Group>
-              <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={editFormValues.isAdmin} onChange={(e) => handleFormChange(e, setEditFormValues)} />
+              <Form.Check 
+                type="checkbox" 
+                label="Admin" 
+                name="isAdmin" 
+                checked={editFormValues.isAdmin} 
+                onChange={(e) => handleFormChange(e, setEditFormValues)} 
+              />
             </Form.Group>
             <Button variant="primary" onClick={handleEditUser}>Guardar Cambios</Button>
           </Form>
