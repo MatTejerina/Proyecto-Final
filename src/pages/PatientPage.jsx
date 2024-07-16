@@ -312,16 +312,7 @@ const PatientPage = () => {
               />
               <Form.Control.Feedback type="invalid">{formErrors.password}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
-              <Form.Check 
-                type="checkbox" 
-                label="Admin" 
-                name="isAdmin" 
-                checked={addFormValues.isAdmin} 
-                onChange={(e) => handleFormChange(e, setAddFormValues)} 
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleAddUser}>Agregar</Button>
+            <Button variant="primary" onClick={handleAddUser} className='mt-2'>Agregar</Button>
           </Form>
         </Modal.Body>
       </Modal>
@@ -403,16 +394,7 @@ const PatientPage = () => {
               />
               <Form.Control.Feedback type="invalid">{formErrors.phone}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
-              <Form.Check 
-                type="checkbox" 
-                label="Admin" 
-                name="isAdmin" 
-                checked={editFormValues.isAdmin} 
-                onChange={(e) => handleFormChange(e, setEditFormValues)} 
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleEditUser}>Guardar Cambios</Button>
+            <Button variant="primary" onClick={handleEditUser} className='mt-2'>Guardar Cambios</Button>
           </Form>
         </Modal.Body>
       </Modal>
