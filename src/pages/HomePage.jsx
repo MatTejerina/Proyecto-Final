@@ -7,7 +7,7 @@ import '../styles/HomePage.css';
 import { Box, Container as ContainerM, Typography } from '@mui/material';
 import Review from '../components/Review';
 
-const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_API_KEY}&q=`
+const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=d42eaa4f8aef4d5ea2a163931240107&q=`
 const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const HomePage = () => {
