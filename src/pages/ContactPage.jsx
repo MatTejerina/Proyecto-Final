@@ -2,7 +2,30 @@ import React from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import '../styles/ContactPage.css';
 
+
 const ContactPage = () => {
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (data) => {
+    setIsLoading(true);
+    try {
+      // Aquí enviarías el comentario por correo electrónico al administrador
+      // Podrías usar una API o servicio para enviar el correo electrónico
+      
+      // Ejemplo simplificado de enviar un mensaje a consola
+      console.log('Comentario enviado:', data);
+      
+      enqueueSnackbar('Comentario enviado correctamente', { variant: 'success' });
+      reset(); // Limpiar el formulario después del envío exitoso
+    } catch (error) {
+      console.error('Error al enviar el comentario:', error);
+      enqueueSnackbar('Error al enviar el comentario', { variant: 'error' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="body-contact">
       <Container className="main-section">

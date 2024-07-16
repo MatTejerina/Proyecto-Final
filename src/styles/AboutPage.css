@@ -14,13 +14,15 @@
     height: 100%;
     margin-bottom: 10px;
     margin-top: 50px !important;
-    padding-bottom: 10px; /* Añadido */
+    padding-bottom: 10px;
+    margin-bottom: 100px;
+    margin-top: 50px !important;
     transition: ease all .5s;
     color: #222;
 }
 
 .contenedor-objetos {
-    min-height: 300px; /* Añadido */
+    min-height: 300px;
     transition: ease all .5s;
 }
 
@@ -271,7 +273,7 @@
     border-radius: 24px;
 }
   
-.introText {
+  .introText {
     max-width: 40%;
     margin: 0 auto;
     padding: 1rem;

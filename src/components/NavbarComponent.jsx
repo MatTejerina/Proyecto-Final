@@ -199,8 +199,7 @@ function NavbarComponent({ user, setUser }) {
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}
-              >
+                sx={{ my: 2, color: 'white', display: 'block', fontSize: '16px' }}> {/* Boton Inicio */}
                 <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
                   {page.name}
                 </Link>
@@ -220,9 +219,9 @@ function NavbarComponent({ user, setUser }) {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Menu">
-              <IconButton onClick={handleOpenUserMenu} 
-              sx={{ my: 2, color: 'white', display: 'block', fontSize: '15px' }}>
-                {user.logged ? "MENU" : ""}
+              <IconButton onClick={handleOpenUserMenu}
+              sx={{ my: 2, color: 'white', display: 'block', fontSize: '16px' }} //boton Inicio
+              >Menu
               </IconButton>
             </Tooltip>
             <Menu
