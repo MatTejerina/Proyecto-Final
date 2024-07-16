@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, ListGroup, Card, Button, Modal, Form } from 'react-bootstrap';
 import PetUsersComponent from '../components/PetUsersComponent';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const PatientPage = () => {
   const [users, setUsers] = useState([]);
@@ -34,7 +34,7 @@ const PatientPage = () => {
   useEffect(() => {
     getUsers();
   }, []);
-//traer lista de ususarios
+  //traer lista de ususarios
   const getUsers = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`);
@@ -46,7 +46,7 @@ const PatientPage = () => {
   };
 
   const handleUserClick = (user) => setSelectedUser(user);
-//agregar usuarios
+  //agregar usuarios
   const handleAddUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users`, {
@@ -74,7 +74,7 @@ const PatientPage = () => {
       console.error("Error al agregar usuario:", error);
     }
   };
-//editar ususarios
+  //editar ususarios
   const handleEditUser = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${selectedUser._id}`, {
@@ -102,7 +102,7 @@ const PatientPage = () => {
       console.error("Error al editar usuario:", error);
     }
   };
-//eliminar usuarios
+  //eliminar usuarios
   const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(`${DATABASE_URL}/users/${userId}`, { method: 'DELETE' });
@@ -128,15 +128,15 @@ const PatientPage = () => {
   };
 
   return (
-    <Container>
+    <Container className='mb-3'>
       <Row className="mt-3">
         <Col>
-          <h2 className="text-center">Lista de Usuarios y Mascotas</h2>
+          <h2 className="text-center">Lista de Dueños y Mascotas</h2>
         </Col>
       </Row>
       <Row className="mt-3">
         <Col className="d-flex justify-content-center">
-          <Button onClick={() => setShowAddModal(true)}>Agregar Usuario</Button>
+          <Button onClick={() => setShowAddModal(true)}>Agregar Dueño</Button>
         </Col>
       </Row>
       <Row className="mt-3 justify-content-center">
@@ -179,7 +179,7 @@ const PatientPage = () => {
       {/* Modal para agregar usuario */}
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Agregar Usuario</Modal.Title>
+          <Modal.Title>Agregar Dueño</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -222,7 +222,7 @@ const PatientPage = () => {
       {/* Modal para editar usuario */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>Editar Dueño</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -250,10 +250,10 @@ const PatientPage = () => {
               <Form.Label>Telefono</Form.Label>
               <Form.Control type="text" name="phone" value={editFormValues.phone} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>
-            <Form.Group>
+            {/* <Form.Group>
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" name="password" value={editFormValues.password} onChange={(e) => handleFormChange(e, setEditFormValues)} />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group>
               <Form.Check type="checkbox" label="Admin" name="isAdmin" checked={editFormValues.isAdmin} onChange={(e) => handleFormChange(e, setEditFormValues)} />
             </Form.Group>

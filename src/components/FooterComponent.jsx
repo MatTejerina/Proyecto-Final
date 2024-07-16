@@ -68,7 +68,11 @@ const Footer = () => {
                   Sobre Nosotros
                 </Link>
               </div>
+<<<<<<< HEAD
               <div className="linea">
+=======
+                <Link to='/contactPage'
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
                 <Link to='contactPage'
                   className="paginas col"
                 >

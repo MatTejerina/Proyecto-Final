@@ -27,8 +27,7 @@ const AboutPage = () => {
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Agostina.jpeg" alt="Agostina Boga" />
+                                <div className="front agostina">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Agostina</span> <br />Boga</h2>
@@ -48,8 +47,7 @@ const AboutPage = () => {
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Matias.jpg" alt="Matias Tejerina" />
+                                <div className="front matias">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Matias</span> <br />Tejerina</h2>
@@ -69,8 +67,7 @@ const AboutPage = () => {
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Tobias.jpeg" alt="Tobias Arias" />
+                                <div className="front tobias">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Tobias</span> <br />Arias</h2>
@@ -91,3 +88,4 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+

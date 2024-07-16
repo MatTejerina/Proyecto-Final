@@ -52,6 +52,7 @@ const PrivateRouter = ({ user, setUser }) => {
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Route path="/plansPage" element={<PlansPage />} />
         <Route path="/contactPage" element={<ContactPage />} />
         <Route path="/aboutPage" element={<AboutPage />} />
@@ -63,6 +64,8 @@ const PrivateRouter = ({ user, setUser }) => {
       </Routes>
       <Footer />
 =======
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
             <Route path="/plansPage" element={<PlansPage />} />
             <Route path="/contactPage" element={<ContactPage />} />
             <Route path="/aboutPage" element={<AboutPage />} />
@@ -74,7 +77,10 @@ const PrivateRouter = ({ user, setUser }) => {
         </div>
         {!isErrorPage && <Footer />}
       </div>
+<<<<<<< HEAD
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     </>
   )
 }

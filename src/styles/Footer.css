@@ -13,6 +13,10 @@ a {
 .footer {
   background-color: rgb(52, 60, 63);
   color: #ccc;
+<<<<<<< HEAD
+=======
+  position: relative;
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
   padding: 0;
   position: relative;
   bottom: 0;
@@ -111,10 +115,6 @@ a {
   .linea {
     padding-right: 8px;
     padding-left: 8px;
-  }
-
-  .footer {
-    margin-top: 1rem;
   }
 }
 

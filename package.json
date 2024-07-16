@@ -14,9 +14,12 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
 =======
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",

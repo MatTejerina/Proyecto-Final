@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import emailjs from 'emailjs-com';
 import '../styles/ContactPage.css';
+=======
+import React from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import '../styles/ContactPage.css';
+
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 
 const ContactPage = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -30,14 +37,14 @@ const ContactPage = () => {
     <div className="body-contact">
       <Container className="main-section">
         <Row>
-          <Col md={6}>
+          <Col >
             <div className="rightSide">
               <div className="text-contact">
                 <h2>¿En qué podemos ayudarte?</h2>
                 <p>Deja tu consulta. Nos contactaremos a la brevedad:</p>
               </div>
               <div className="divForm-contact">
-                <Form className="form-contact" >
+                <Form className="form-contact">
                   <Form.Group controlId="nombreCompleto">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control
@@ -91,10 +98,9 @@ const ContactPage = () => {
               </div>
             </div>
           </Col>
-
           <Col >
             <div className="leftSide">
-              <div className="element-contact">
+              <div className="element-contact small-element-contact">
                 <div className="logo-infoContact">
                   <i className="fa fa-phone"></i>
                 </div>
@@ -103,7 +109,7 @@ const ContactPage = () => {
                   <p>+54 9 398-783652</p>
                 </div>
               </div>
-              <div className="element-contact">
+              <div className="element-contact small-element-contact">
                 <div className="logo-infoContact">
                   <i className="fa fa-envelope"></i>
                 </div>
@@ -111,6 +117,13 @@ const ContactPage = () => {
                   <h3>Email</h3>
                   <p>rollingVet@gmail.com</p>
                 </div>
+              </div>
+              <div className="content large-content mt-4">
+                <div className="text-map">
+                  <h4>¿Dónde encontrarnos?</h4>
+                  <h6>Gral. José de San Martín 839</h6>
+                </div>
+                <iframe className='mapa' src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14241.424387574643!2d-65.209492!3d-26.828624!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c13f1ceb33d%3A0xbb344eb482b6ff14!2sGral.%20Jos%C3%A9%20de%20San%20Mart%C3%ADn%20839%2C%20T4000%20San%20Miguel%20de%20Tucum%C3%A1n%2C%20Tucum%C3%A1n!5e0!3m2!1ses-419!2sar!4v1720969682550!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </Col>
@@ -121,4 +134,7 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7

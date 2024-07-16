@@ -1,32 +1,55 @@
+<<<<<<< HEAD
 /* body {
     background-color: rgb(239, 239, 239);
 } */
 
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 .about-page {
-    padding-bottom: 2rem; /* Espacio para el footer */
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+    min-height: 100vh;
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgba(255, 255, 255, 0.217)), url("../assets/Fondo_about.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }
 
+<<<<<<< HEAD
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 .acerca-de {
     width: 100%;
     height: 100%;
+    margin-bottom: 10px;
+    margin-top: 50px !important;
+    padding-bottom: 10px;
     margin-bottom: 100px;
     margin-top: 50px !important;
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     padding-bottom: 100px; /* Añadido */
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     transition: ease all .5s;
     color: #222;
 }
 
 .contenedor-objetos {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     min-height: 300px; /* Añadido */
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+    min-height: 300px;
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     transition: ease all .5s;
 }
 
@@ -70,11 +93,17 @@
 
 @media only screen and (max-width: 922px) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     .about-page {
         padding-bottom: 1px; /* Espacio para el footer */
     }
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+    .about-page {
+        padding-bottom: 1px; /* Espacio para el footer */
+    }
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     .contenedor-objetos {
         flex-direction: column;
         transition: ease all .5s;
@@ -161,7 +190,33 @@
     transform-style: preserve-3d;
     transition: transform 1s;
 }
-
+.agostina {
+    background: url(../assets/Agostina.jpeg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.matias {
+    background: url(../assets/Matias.jpg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.tobias {
+    background: url(../assets/Tobias.jpeg);
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 20px;
+}
 .card_1 .front {
     backface-visibility: hidden;
     height: 500px;
@@ -236,7 +291,7 @@
 .card_1:hover .card_inner {
     transform: rotateY(-180deg);
     border-radius: 20px;
-    box-shadow: 0px 10px 250px 15px rgba(0, 159, 48, 0.548);
+    box-shadow: 0px 10px 250px 15px rgba(0, 50, 115, 0.463);
 }
 
 .card_1 .social .icon:hover {
@@ -245,9 +300,13 @@
     transform: scale(1.3);
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 .loginForm {
     max-width: 40%;
     margin: 0 auto;
@@ -255,6 +314,7 @@
     text-align: center;
     background-color: #808080;
     border-radius: 24px;
+<<<<<<< HEAD
 <<<<<<< HEAD
   }
   
@@ -264,6 +324,11 @@
   
 .introText {
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+}
+  
+  .introText {
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     max-width: 40%;
     margin: 0 auto;
     padding: 1rem;
@@ -271,9 +336,12 @@
     font-size: 1rem;
     color: #000;
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
   
 =======
+=======
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 }
 
 .acerca-de {
@@ -288,5 +356,9 @@
     margin: 5px; /* Espacio más pequeño entre las tarjetas */
     width: 100%;
     max-width: 370px; /* Limitar el ancho máximo */
+<<<<<<< HEAD
 }
 >>>>>>> 0df968540d6246c801a00cca56e9cd03043df8ce
+=======
+}
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7

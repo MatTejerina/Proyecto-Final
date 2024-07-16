@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import VeterinarianList from '../components/VeterinarianList';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const AdminPage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -56,7 +56,7 @@ const AdminPage = () => {
   }
 
   return (
-    <Container>
+    <Container className='admin-page-content'>
       <div className='text-center'>
         <h1>Página de Administración</h1>
         <p className="lead">Bienvenido, Administrador</p>
@@ -94,8 +94,13 @@ const AdminPage = () => {
         </Table>
       </div>
 
+<<<<<<< HEAD
         <h2>Veterinarios</h2>
         <VeterinarianList/>
+=======
+      <h2>Veterinarios</h2>
+      <VeterinarianList onUpdateAppointments={updateAppointments}/>
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
     </Container>
   );
 };

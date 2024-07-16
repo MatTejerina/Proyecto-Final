@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .loginForm {
   max-width: 40%;
   margin: 5% auto;
@@ -11,4 +12,11 @@
 .link {
   text-decoration: none;
   color: #000;
+=======
+.app{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+>>>>>>> 4e46950d8d4d5cc2861aea2e3f9244ef38cd16c7
 }
