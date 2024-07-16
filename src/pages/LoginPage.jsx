@@ -71,7 +71,7 @@ const LoginPage = ({ setUser }) => {
           <Button className='btnLogin ' variant="primary" type='submit'>
             Iniciar Sesion
           </Button>
-          <p className='text-dark m-0'>No tienes una cuenta? <Link className='links' to='/errorPage'> Registrarse</Link></p>
+          <p className=' texto text-dark m-0'>No tienes una cuenta? <Link className='links' to='/errorPage'> Registrarse</Link></p>
         </Form>
       </div>
     </>

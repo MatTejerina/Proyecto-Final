@@ -9,18 +9,18 @@
 .body-contact {
   font-family: "Poppins", sans-serif;
   overflow: hidden;
-  min-height: 100vh;
   background-image: url("../assets/Fondo_contacto.jpg");
   background-position: center;
   background-size: cover;
   height: 100%;
   width: 100%;
+  padding: 50px 0;
 }
 
 /* Estilos de secciones específicas */
 .text-contact p {
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: black;
 }
 
@@ -29,6 +29,7 @@
   font-size: 1rem;
   text-transform: uppercase;
   color: black;
+  font-weight: 600;
 }
 
 /* Estilos de formulario */
@@ -84,12 +85,7 @@
 }
 
 /* Estilos de contacto */
-.leftSide {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  font-size: 0.7rem;
-}
+
 
 .element-contact {
   background-color: #011936;
@@ -137,6 +133,7 @@
 
 .rightSide {
   width: 100%;
+  margin-bottom: 12px;
 }
 
 .mapa {
@@ -146,6 +143,12 @@
 }
 
 @media (min-width: 768px) {
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 0.7rem;
+  }
 
   /* Media Queries para pantallas más grandes */
   .element-contact {
@@ -163,6 +166,10 @@
 
   .element-contact:first-child {
     margin-left: auto;
+  }
+
+  .text-contact p {
+    font-weight: 550;
   }
 }
 
