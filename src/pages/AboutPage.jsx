@@ -6,7 +6,7 @@ import { faFacebookSquare, faInstagram, faTwitter } from '@fortawesome/free-bran
 
 const AboutPage = () => {
     return (
-        <div>
+        <div className="about-page">
             <section className="acerca-de-grupal d-flex flex-column align-items-center">
                 <div className="contenedor-objetos d-flex justify-content-center align-items-center">
                     <div className="texto d-flex flex-column align-items-end">
@@ -27,8 +27,7 @@ const AboutPage = () => {
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Agostina.jpeg" alt="Agostina Boga" />
+                                <div className="front agostina">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Agostina</span> <br />Boga</h2>
@@ -43,13 +42,12 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="tarjeta col-xl-2 col-lg-3 col-md-4 col-sd-12 m-2">
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Matias.jpg" alt="Matias Tejerina" />
+                                <div className="front matias">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Matias</span> <br />Tejerina</h2>
@@ -69,8 +67,7 @@ const AboutPage = () => {
                     <div className="containe">
                         <div className="card_1">
                             <div className="card_inner">
-                                <div className="front">
-                                    <img src="../src/assets/Tobias.jpeg" alt="Tobias Arias" />
+                                <div className="front tobias">
                                 </div>
                                 <div className="back">
                                     <h2><span className="nombre-tarjeta">Tobias</span> <br />Arias</h2>

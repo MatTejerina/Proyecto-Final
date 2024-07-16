@@ -1,6 +1,4 @@
-// components/Footer.jsx
-
-import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 import { Link } from 'react-router-dom';
 
@@ -68,7 +66,7 @@ const Footer = () => {
                   Sobre Nosotros
                 </Link>
               </div>
-              <div className="linea">
+                <Link to='/contactPage'
                 <Link to='contactPage'
                   className="paginas col"
                 >

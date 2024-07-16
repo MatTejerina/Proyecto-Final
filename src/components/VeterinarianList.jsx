@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import VeterinarianFormModal from './VeterinarianFormModal';
-import ConfirmationModal from './ConfirmationModal'; // Importa el nuevo componente
+import ConfirmationModal from './ConfirmationModal';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
-const VeterinarianList = () => {
+const VeterinarianList = ({ onUpdateAppointments }) => {
   const [veterinarians, setVeterinarians] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Estado para el modal de confirmación
-  const [selectedVeterinarian, setSelectedVeterinarian] = useState(null); // Veterinario seleccionado para eliminación
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [selectedVeterinarian, setSelectedVeterinarian] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -18,6 +18,9 @@ const VeterinarianList = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/veterinarians`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const data = await response.json();
       setVeterinarians(data);
     } catch (error) {
@@ -39,8 +42,10 @@ const VeterinarianList = () => {
       const response = await fetch(`${DATABASE_URL}/veterinarians/${selectedVeterinarian}`, { method: 'DELETE' });
       if (response.ok) {
         fetchData();
+        onUpdateAppointments(); // Notificar a AdminPage que se ha actualizado la lista de veterinarios
       } else {
-        console.error('Error eliminando el veterinario');
+        const errorData = await response.json();
+        console.error('Error eliminando el veterinario:', errorData.message || 'Error desconocido');
       }
     } catch (error) {
       console.error('Error eliminando el veterinario:', error);
@@ -90,3 +95,4 @@ const VeterinarianList = () => {
 };
 
 export default VeterinarianList;
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import VeterinarianList from '../components/VeterinarianList';
 
-const DATABASE_URL = 'http://localhost:4500';
+const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const AdminPage = () => {
   const [appointments, setAppointments] = useState([]);
@@ -45,6 +45,11 @@ const AdminPage = () => {
     fetchVeterinarians();
   }, []);
 
+  const updateAppointments = async () => {
+    // Llamar a fetchAppointments para actualizar los turnos después de eliminar un veterinario
+    await fetchAppointments();
+  };
+
   const renderTableRows = () => {
     if (!appointments || appointments.length === 0) {
       return (
@@ -53,10 +58,21 @@ const AdminPage = () => {
         </tr>
       );
     }
-  }
+
+    return appointments.map(appointment => (
+      <tr key={appointment._id}>
+        <td>{appointment.pet.owner.firstName} {appointment.pet.owner.lastName}</td>
+        <td>{appointment.pet.name}</td>
+        <td>{appointment.pet.type} - {appointment.pet.race}</td>
+        <td>{appointment.veterinarian.name}</td>
+        <td>{appointment.date}</td>
+        <td>{appointment.timeSlot}</td>
+      </tr>
+    ));
+  };
 
   return (
-    <Container>
+    <Container className='admin-page-content'>
       <div className='text-center'>
         <h1>Página de Administración</h1>
         <p className="lead">Bienvenido, Administrador</p>
@@ -76,26 +92,13 @@ const AdminPage = () => {
             </tr>
           </thead>
           <tbody className=' text-center'>
-          {renderTableRows()}
-        </tbody>
-          <tbody className='text-center'>
-            {appointments.map(appointment => (
-              <tr key={appointment._id}>
-                <td>{appointment.pet.owner.firstName} {appointment.pet.owner.lastName}</td>
-                <td>{appointment.pet.name}</td>
-                <td>{appointment.pet.type} - {appointment.pet.race}</td>
-                <td>{appointment.veterinarian.name}</td>
-                <td>{appointment.date}</td>
-                <td>{appointment.timeSlot}</td>
-              </tr>
-            ))}
+            {renderTableRows()}
           </tbody>
-          
         </Table>
       </div>
 
-        <h2>Veterinarios</h2>
-        <VeterinarianList/>
+      <h2>Veterinarios</h2>
+      <VeterinarianList onUpdateAppointments={updateAppointments}/>
     </Container>
   );
 };
