@@ -61,7 +61,7 @@ const ConsultaPlan = () => {
   };
 
   return (
-    <div className="main-section">
+    <div className="main-section-planes">
       <div className="contenedor">
         {/* Formulario de consulta */}
         <div className="form-container">
