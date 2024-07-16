@@ -75,8 +75,8 @@ function AppointmentTable({ appointmentsUpdated }) {
 
   return (
     <div>
-      <Table striped bordered hover>
-        <thead className=' text-center'>
+      <Table striped bordered hover responsive>
+        <thead className='table-dark text-center'>
           <tr>
             <th>Dueño</th>
             <th>Mascota</th>
