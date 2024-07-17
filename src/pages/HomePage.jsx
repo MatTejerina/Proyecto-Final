@@ -6,8 +6,8 @@ import Carousel from 'react-bootstrap/Carousel';
 import '../styles/HomePage.css';
 import { Box, Container as ContainerM, Typography } from '@mui/material';
 import Review from '../components/Review';
+import WeatherPanel from '../components/WeatherPanel';
 
-const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=d42eaa4f8aef4d5ea2a163931240107&q=`
 const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const HomePage = () => {
@@ -28,20 +28,6 @@ const HomePage = () => {
     { avatar: 'https://static.vecteezy.com/system/resources/previews/019/495/228/non_2x/woman-girl-avatar-user-person-long-hair-pink-clothing-flat-style-vector.jpg', name: 'Cliente 4', rating: 2, comment: 'Podría ser mejor.', color: '#FF7043' },
   ];
 
-  const handleWeather = async () => {
-    const response = await fetch(`${API_WEATHER}${"San Miguel de Tucuman"}`);
-    const data = await response.json();
-    if (data.error) throw { message: data.error.message };
-    setWeather({
-      city: data.location.name,
-      country: data.location.country,
-      temp: data.current.temp_c,
-      condition: data.current.condition.code,
-      icon: data.current.condition.icon,
-      conditionText: data.current.condition.text
-    });
-  };
-
   const checkVet = async () => {
     try {
       const response = await fetch(`${DATABASE_URL}/veterinarians`, {
@@ -55,7 +41,6 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    handleWeather();
     checkVet();
   }, []);
 
@@ -85,68 +70,44 @@ const HomePage = () => {
         </Carousel.Item>
 
       </Carousel>
-      <Container fluid>
-        <Row className="align-items-center">
-          <Col md={2} className="weather-container">
-            <ContainerM className='containerM' maxWidth='xs' sx={{ mt: 1, backgroundColor: '#B9D9EB', borderRadius: '8px' }}>
-              {weather.city && (
-                <Box sx={{ mt: 1, textAlign: 'center' }}>
-                  <Box
-                    component='img'
-                    alt={weather.conditionText}
-                    src={weather.icon}
-                    sx={{ margin: '0 auto', width: '70px', height: '70px' }}
-                  />
-                  <Typography variant='h4' component='h2'>
-                    {weather.temp} °C
-                  </Typography>
-                  <Typography variant='h6' component='h5'>
-                    {weather.city}, {weather.country}
-                  </Typography>
-                  <Typography variant='body2' component='h5'>
-                    {weather.conditionText}
-                  </Typography>
-                </Box>
-              )}
-            </ContainerM>
+      <Container className="weather-container">
+        <WeatherPanel />
+      </Container>
+      <Container className="mt-4">
+        <h2 className="products text-center mb-4">Servicios que ofrecemos</h2>
+        <Row className="justify-content-center">
+          <Col md={3} className="mb-4">
+            <Card className="h-100">
+              <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/gato-perro-siendo-afectuosos-mostrando-amor-otro_23-2150984323.jpg?t=st=1719962876~exp=1719966476~hmac=f5ec968e457b7e93ce13a9c18d34e9216ae272187072e5f9c2495d3bad3e698e&w=740" />
+              <Card.Body>
+                <Card.Title as={Link} to='/plansPage'>Plan Primeros Pasos</Card.Title>
+                <Card.Text>
+                  Servicios para mascotas de 0 a 5 años.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
-          <Col md={9} className="text-center mt-1">
-            <h2 className="products text-center mb-4">Servicios que ofrecemos</h2>
-            <Row className="justify-content-center">
-              <Col md={3} className="mb-4">
-                <Card className="h-100">
-                  <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/gato-perro-siendo-afectuosos-mostrando-amor-otro_23-2150984323.jpg?t=st=1719962876~exp=1719966476~hmac=f5ec968e457b7e93ce13a9c18d34e9216ae272187072e5f9c2495d3bad3e698e&w=740" />
-                  <Card.Body>
-                    <Card.Title as={Link} to='/plansPage'>Plan Primeros Pasos</Card.Title>
-                    <Card.Text>
-                      Servicios para mascotas de 0 a 5 años.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col md={3} className="mb-4">
-                <Card className="h-100">
-                  <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/gato-amor-siendo-afectuosos-otro_23-2150984551.jpg?t=st=1719962906~exp=1719966506~hmac=6bc94f4a51fbe3abee7e1529eea4d4f6435d2e4e0be7cd67fdd35ab8a3eb1517&w=740" />
-                  <Card.Body>
-                    <Card.Title as={Link} to='/plansPage'>Plan Madurando</Card.Title>
-                    <Card.Text>
-                      servicios para mascotas de 5 a 10 años.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-              <Col md={3} className="mb-4">
-                <Card className="h-100">
-                  <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/primer-plano-terrier-tibetano-gato-siberiano-aislado-pared-blanca_181624-38226.jpg?t=st=1719962959~exp=1719966559~hmac=a7dfbfd1dd06293774a384318bb8a38e060e16ab9c425d7d5ea1a2981f71207b&w=740" />
-                  <Card.Body>
-                    <Card.Title as={Link} to='/plansPage'>Plan Adultos</Card.Title>
-                    <Card.Text>
-                      Servicios para mascotas de más de 10 años.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
+          <Col md={3} className="mb-4">
+            <Card className="h-100">
+              <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/gato-amor-siendo-afectuosos-otro_23-2150984551.jpg?t=st=1719962906~exp=1719966506~hmac=6bc94f4a51fbe3abee7e1529eea4d4f6435d2e4e0be7cd67fdd35ab8a3eb1517&w=740" />
+              <Card.Body>
+                <Card.Title as={Link} to='/plansPage'>Plan Madurando</Card.Title>
+                <Card.Text>
+                  servicios para mascotas de 5 a 10 años.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={3} className="mb-4">
+            <Card className="h-100">
+              <Card.Img variant="top" src="https://img.freepik.com/foto-gratis/primer-plano-terrier-tibetano-gato-siberiano-aislado-pared-blanca_181624-38226.jpg?t=st=1719962959~exp=1719966559~hmac=a7dfbfd1dd06293774a384318bb8a38e060e16ab9c425d7d5ea1a2981f71207b&w=740" />
+              <Card.Body>
+                <Card.Title as={Link} to='/plansPage'>Plan Adultos</Card.Title>
+                <Card.Text>
+                  Servicios para mascotas de más de 10 años.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
