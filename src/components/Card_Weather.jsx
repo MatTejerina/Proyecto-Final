@@ -41,7 +41,7 @@ const Card_Weather = ({ loadingData, showData, weather, forecast }) => {
     <div className="mt-5">
       {
         showData === true ? (
-          <div className="container">
+          <div className="container-weather">
             <div className="card-weather mb-3 mx-auto bg-dark text-light rounded">
               <div className="row g-0">
                 <div className="col-md-4">
