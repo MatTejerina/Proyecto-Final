@@ -70,9 +70,9 @@ const HomePage = () => {
         </Carousel.Item>
 
       </Carousel>
-      <Container className="weather-container">
+      <div className="weather-container">
         <WeatherPanel />
-      </Container>
+      </div>
       <Container className="mt-4">
         <h2 className="products text-center mb-4">Servicios que ofrecemos</h2>
         <Row className="justify-content-center">
