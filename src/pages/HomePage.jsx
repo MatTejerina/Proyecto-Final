@@ -4,7 +4,6 @@ import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import '../styles/HomePage.css';
-import { Box, Container as ContainerM, Typography } from '@mui/material';
 import Review from '../components/Review';
 import WeatherPanel from '../components/WeatherPanel';
 

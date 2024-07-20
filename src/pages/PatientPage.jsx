@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 const DATABASE_URL = 'https://proyecto-final-backend-tn7e.onrender.com';
 
 const PatientPage = () => {
-  const { enqueueSnackbar } = useSnackbar(); // Agregar esta línea
+  const { enqueueSnackbar } = useSnackbar();
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -72,7 +72,7 @@ const PatientPage = () => {
             password: '',
             isAdmin: false
           });
-          enqueueSnackbar('Usuario creado con éxito', { variant: 'success' }); // Agregar esta línea
+          enqueueSnackbar('Usuario creado con éxito', { variant: 'success' });
         } else {
           console.error("Error al agregar usuario");
         }
@@ -221,7 +221,6 @@ const PatientPage = () => {
         )}
       </Row>
 
-      {/* Modal para agregar usuario */}
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Agregar Dueño</Modal.Title>
@@ -317,7 +316,6 @@ const PatientPage = () => {
         </Modal.Body>
       </Modal>
 
-      {/* Modal para editar usuario */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar Dueño</Modal.Title>
@@ -399,7 +397,6 @@ const PatientPage = () => {
         </Modal.Body>
       </Modal>
 
-      {/* Modal para mostrar las mascotas */}
       <Modal show={showPetsModal} onHide={() => setShowPetsModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Mascotas de {selectedUser?.firstName} {selectedUser?.lastName}</Modal.Title>

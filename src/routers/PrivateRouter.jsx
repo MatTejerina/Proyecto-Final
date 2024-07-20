@@ -16,11 +16,9 @@ const PrivateRouter = ({ user, setUser }) => {
   const isAdminPage = window.location.pathname === '/adminPage';
   const location = useLocation();
 
-  // Determine if it's an error page or not found page based on path
   const isErrorPage = location.pathname === "/errorPage" || !isValidRoute(location.pathname);
 
   function isValidRoute(pathname) {
-    // Define the valid routes
     const validRoutes = [
       "/",
       "/patientPage",
@@ -32,11 +30,8 @@ const PrivateRouter = ({ user, setUser }) => {
       "/plansPage",
       "/aboutPage",
       "/appointmentPage"
-
-      // Add other valid routes as needed
     ];
 
-    // Check if the current pathname is in the valid routes
     return validRoutes.includes(pathname);
   }
   return (

@@ -35,7 +35,6 @@ function AppointmentsPage() {
       />
       <AppointmentTable appointmentsUpdated={appointmentsUpdated} />
       
-      {/* Alerta de cita creada */}
       <Alert variant="success" show={showAlert} onClose={() => setShowAlert(false)} dismissible>
         Cita creada exitosamente.
       </Alert>

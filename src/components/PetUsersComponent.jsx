@@ -130,7 +130,6 @@ const PetUsersComponent = ({ userId }) => {
         ))}
       </ListGroup>
 
-      {/* Modal para agregar mascota */}
       <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Agregar Mascota</Modal.Title>
@@ -158,7 +157,6 @@ const PetUsersComponent = ({ userId }) => {
         </Modal.Body>
       </Modal>
 
-      {/* Modal para editar mascota */}
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Editar Mascota</Modal.Title>
@@ -186,7 +184,6 @@ const PetUsersComponent = ({ userId }) => {
         </Modal.Body>
       </Modal>
 
-      {/* Modal para eliminar mascota */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Eliminación</Modal.Title>

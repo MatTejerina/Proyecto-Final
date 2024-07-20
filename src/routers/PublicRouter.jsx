@@ -14,11 +14,9 @@ import NavbarComponent from '../components/NavbarComponent';
 const PublicRouter = ({ user, setUser }) => {
   const location = useLocation();
 
-  // Determine if it's an error page or not found page based on path
   const isErrorPage = location.pathname === "/errorPage" || !isValidRoute(location.pathname);
 
   function isValidRoute(pathname) {
-    // Define the valid routes
     const validRoutes = [
       "/",
       "/loginPage",
@@ -28,10 +26,8 @@ const PublicRouter = ({ user, setUser }) => {
       "/plansPage",
       "/registerPage",
       "/homePage"
-      // Add other valid routes as needed
     ];
 
-    // Check if the current pathname is in the valid routes
     return validRoutes.includes(pathname);
   }
   return (

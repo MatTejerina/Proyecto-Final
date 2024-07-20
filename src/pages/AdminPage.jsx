@@ -13,14 +13,11 @@ const AdminPage = () => {
       const response = await fetch(`${DATABASE_URL}/appointments`);
       let data = await response.json();
       
-      // Ordenar los turnos por fecha y hora
       data.sort((a, b) => {
-        // Primero por fecha
         const dateComparison = new Date(a.date) - new Date(b.date);
         if (dateComparison !== 0) {
           return dateComparison;
         }
-        // Luego por hora
         return a.timeSlot.localeCompare(b.timeSlot);
       });
       
@@ -46,7 +43,6 @@ const AdminPage = () => {
   }, []);
 
   const updateAppointments = async () => {
-    // Llamar a fetchAppointments para actualizar los turnos después de eliminar un veterinario
     await fetchAppointments();
   };
 

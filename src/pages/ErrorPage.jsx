@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ErrorPage.css'; // Asegúrate de que la ruta del archivo CSS sea correcta
+import '../styles/ErrorPage.css';
 
 const ErrorPage = () => {
   return (

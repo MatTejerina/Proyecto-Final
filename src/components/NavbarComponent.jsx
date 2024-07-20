@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -145,7 +144,7 @@ function NavbarComponent({ user, setUser }) {
                 sx={{
                   fontFamily: 'monospace',
                   fontWeight: 700,
-                  color: 'lightblue', // Cambiar al color del navbar
+                  color: 'lightblue',
                   textDecoration: 'none',
                   ml: 0,
                 }}

@@ -42,7 +42,7 @@ const VeterinarianList = ({ onUpdateAppointments }) => {
       const response = await fetch(`${DATABASE_URL}/veterinarians/${selectedVeterinarian}`, { method: 'DELETE' });
       if (response.ok) {
         fetchData();
-        onUpdateAppointments(); // Notificar a AdminPage que se ha actualizado la lista de veterinarios
+        onUpdateAppointments();
       } else {
         const errorData = await response.json();
         console.error('Error eliminando el veterinario:', errorData.message || 'Error desconocido');

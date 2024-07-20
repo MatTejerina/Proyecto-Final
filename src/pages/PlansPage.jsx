@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
-import '../styles/PlansPage.css'; // Importa tus estilos CSS aquí
+import '../styles/PlansPage.css';
 
 const serviceID = 'service_uk4txcr';
 const templateID = 'template_2wivkev';
@@ -12,31 +12,28 @@ const ConsultaPlan = () => {
     correo: '',
     tel: '',
     consulta: '',
-    plan: '', // Campo para almacenar el plan seleccionado
-    mascota: '', // Campo para el tipo de mascota (gato, perro, otro)
+    plan: '', 
+    mascota: '',
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validar formato de correo electrónico
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.correo)) {
       alert('Por favor ingrese un correo electrónico válido');
       return;
     }
 
-    // Configurar los parámetros de la plantilla de EmailJS
     const templateParams = {
-      to_email: formData.correo, // Aquí asignamos el correo electrónico del destinatario
-      to_name: formData.nombreCompleto, // Esto es opcional si lo usas en tu plantilla
-      plan: formData.plan, // Pasamos el plan seleccionado
+      to_email: formData.correo, 
+      to_name: formData.nombreCompleto, 
+      plan: formData.plan,
       consulta: formData.consulta
     };
 
     console.log(templateParams);
 
-    // Envío del formulario usando EmailJS
     emailjs.send(serviceID, templateID, templateParams, userID)
       .then((response) => {
         console.log('Correo enviado correctamente!', response.status, response.text);
@@ -47,7 +44,7 @@ const ConsultaPlan = () => {
           correo: '',
           tel: '',
           consulta: '',
-          plan: '', // Limpiar el campo del plan después de enviar
+          plan: '',
         });
       })
       .catch((error) => {
@@ -63,7 +60,6 @@ const ConsultaPlan = () => {
   return (
     <div className="main-section-planes">
       <div className="contenedor">
-        {/* Formulario de consulta */}
         <div className="form-container">
           <form className="form-contacto" onSubmit={handleSubmit}>
             <label htmlFor="plan" className="labelContacto">
@@ -151,7 +147,6 @@ const ConsultaPlan = () => {
           </form>
         </div>
 
-        {/* Aside con los planes */}
         <aside className="aside-container">
           <div className="plan-container">
             <div className="plan verde">
