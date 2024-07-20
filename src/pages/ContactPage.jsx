@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import '../styles/ContactPage.css';
 
 const serviceID = 'service_uk4txcr';
-const templateID = 'template_2wivkev';
+const templateID = 'template_w9ehzob';
 const userID = 'PmI8SU0Lj2hXogTSp';
 
 const ContactPage = () => {
@@ -71,7 +71,12 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      emailjs.send(serviceID, templateID, formData, userID)
+      const templateParams = {
+        to_email: formData.correo,
+        to_name: formData.nombreCompleto,
+        consulta: formData.consulta
+      };
+      emailjs.send(serviceID, templateID, templateParams, userID)
         .then((result) => {
           console.log('Email enviado:', result.text);
           enqueueSnackbar('Consulta enviada con éxito.', { variant: 'success' });
@@ -89,7 +94,6 @@ const ContactPage = () => {
         });
     }
   };
-  
 
   return (
     <div className="body-contact">

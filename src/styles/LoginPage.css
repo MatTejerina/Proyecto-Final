@@ -56,7 +56,6 @@
   color: white;
   border-color: #1C3144;
   font-size: medium;
-  /* Cambiar el color del borde si es necesario */
 }
 
 @media (min-width:768px) {
