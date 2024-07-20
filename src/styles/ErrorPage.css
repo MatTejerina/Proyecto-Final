@@ -1,11 +1,8 @@
-/* Estilos para la página de error */
 body {
   margin: 0;
   padding: 0;
-  /* background-color: rgb(20, 20, 20); */
   height: 100vh;
   overflow-x: hidden;
-  /* Evita el desbordamiento horizontal */
 }
 
 .flechita {
@@ -43,7 +40,6 @@ body {
   position: absolute;
   height: 100%;
   width: 100%;
-  /* Ajustado para cubrir completamente el contenedor */
   z-index: -100;
   object-fit: cover;
   top: 0;
@@ -53,9 +49,7 @@ body {
 .video-wrapper>.overlay-error {
   height: 100%;
   width: 100%;
-  /* Ajustado para cubrir completamente el contenedor */
   background-color: rgba(0, 0, 0, 0.3);
-  /* Cambiado a rgba para transparencia */
   position: absolute;
   top: 0;
   left: 0;
@@ -68,7 +62,6 @@ body {
   box-sizing: border-box;
   z-index: 1000;
   width: 90%;
-  /* Ajustado para adaptarse a diferentes tamaños de pantalla */
   text-align: center;
 }
 
@@ -92,7 +85,6 @@ body {
 
   .video-wrapper>.video-background {
     width: 70%;
-    /* Ajustado para cubrir el 70% del contenedor */
   }
 
   .video-wrapper>.overlay-error {
@@ -101,7 +93,6 @@ body {
 
   .main-error>.content-error {
     width: 100%;
-    /* Ajustado para adaptarse a diferentes tamaños de pantalla */
   }
 
   .col-error-first {
@@ -126,7 +117,6 @@ body {
 @media (min-width: 992px) {
   .video-wrapper>.video-background {
     width: 70%;
-    /* Ajustado para cubrir el 70% del contenedor */
   }
 
   .video-wrapper>.overlay-error {

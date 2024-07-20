@@ -1,20 +1,15 @@
 .carousel-item {
-  /* height: calc(100vh - 50px); */
-  /* Ajusta 50px según el espacio que necesiten los puntos de paginación */
   overflow: hidden;
 }
 
 .carousel-item img {
   width: 100vw;
   height: 40vw;
-  /* height: calc(100vh - 50px); */
-  /* Ajusta 50px según el espacio que necesiten los puntos de paginación */
   object-fit: cover;
 }
 
 .container-vet {
   background-color: #f0f8ff;
-  /* Color de fondo */
   padding: 20px;
 }
 
@@ -25,7 +20,6 @@
 
 .vet {
   color: white;
-  /* Color del texto dentro del círculo */
   font-size: 20px;
 }
 
@@ -33,7 +27,6 @@
 
 .products {
   color: #ff8c00;
-  /* Color del título */
   background-color: #f0f8ff;
   padding: 10px;
   border-radius: 10px;
@@ -82,7 +75,6 @@ body {
   background: #fefefe;
 }
 
-/* Weather */
 .input-group {
   width: 60%;
 }

@@ -14,13 +14,13 @@
     height: 100%;
     margin-bottom: 10px;
     margin-top: 50px !important;
-    padding-bottom: 10px; /* Añadido */
+    padding-bottom: 10px;
     transition: ease all .5s;
     color: #222;
 }
 
 .contenedor-objetos {
-    min-height: 300px; /* Añadido */
+    min-height: 300px;
     transition: ease all .5s;
 }
 
@@ -53,7 +53,7 @@
     font-size: 3rem;
     width: 450px;
     height: 75px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.4); 
+    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
 }
 
 .separador {
@@ -64,8 +64,9 @@
 
 @media only screen and (max-width: 922px) {
     .about-page {
-        padding-bottom: 1px; /* Espacio para el footer */
+        padding-bottom: 1px;
     }
+
     .contenedor-objetos {
         flex-direction: column;
         transition: ease all .5s;
@@ -86,6 +87,7 @@
         margin-top: 20px;
         margin-bottom: -0;
     }
+
     .tarjeta {
         display: flex;
         justify-content: center;
@@ -152,6 +154,7 @@
     transform-style: preserve-3d;
     transition: transform 1s;
 }
+
 .agostina {
     background: url(../assets/Agostina.jpeg);
     width: 100%;
@@ -161,6 +164,7 @@
     object-fit: cover;
     border-radius: 20px;
 }
+
 .matias {
     background: url(../assets/Matias.jpg);
     width: 100%;
@@ -170,6 +174,7 @@
     object-fit: cover;
     border-radius: 20px;
 }
+
 .tobias {
     background: url(../assets/Tobias.jpeg);
     width: 100%;
@@ -179,6 +184,7 @@
     object-fit: cover;
     border-radius: 20px;
 }
+
 .card_1 .front {
     backface-visibility: hidden;
     height: 500px;
@@ -270,7 +276,7 @@
     background-color: #808080;
     border-radius: 24px;
 }
-  
+
 .introText {
     max-width: 40%;
     margin: 0 auto;
@@ -289,7 +295,7 @@
 .tarjeta {
     display: flex;
     justify-content: center;
-    margin: 5px; /* Espacio más pequeño entre las tarjetas */
+    margin: 5px;
     width: 100%;
-    max-width: 370px; /* Limitar el ancho máximo */
+    max-width: 370px;
 }
