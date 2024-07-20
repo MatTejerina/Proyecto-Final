@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
+import { useSnackbar } from 'notistack';
 import '../styles/PlansPage.css';
 
 const serviceID = 'service_uk4txcr';
@@ -7,6 +8,7 @@ const templateID = 'template_2wivkev';
 const userID = 'PmI8SU0Lj2hXogTSp';
 
 const ConsultaPlan = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [formData, setFormData] = useState({
     nombreCompleto: '',
     correo: '',
@@ -16,12 +18,57 @@ const ConsultaPlan = () => {
     mascota: '',
   });
 
+  const [errors, setErrors] = useState({
+    nombreCompleto: '',
+    correo: '',
+    tel: '',
+    consulta: '',
+    plan: '',
+    mascota: '',
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    let errors = {};
+
+    if (!/^[a-zA-Z\s]+$/.test(formData.nombreCompleto)) {
+      errors.nombreCompleto = 'El nombre completo solo puede contener letras y espacios.';
+      valid = false;
+    }
+
+    if (!/^\+\d{1,4}\d{1,10}$/.test(formData.tel)) {
+      errors.tel = 'El número de teléfono debe estar en el formato +123456789.';
+      valid = false;
+    }
+
+    if (formData.correo === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.correo)) {
+      errors.correo = 'Por favor ingrese un correo electrónico válido.';
+      valid = false;
+    }
+
+    if (formData.consulta.length < 10) {
+      errors.consulta = 'La consulta debe tener al menos 10 caracteres.';
+      valid = false;
+    }
+
+    if (formData.plan === '') {
+      errors.plan = 'Debe seleccionar un plan.';
+      valid = false;
+    }
+
+    if (formData.mascota.length <= 3) {
+      errors.mascota = 'El tipo de mascota debe tener al menos 3 caracteres.';
+      valid = false;
+    }
+
+    setErrors(errors);
+    return valid;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.correo)) {
-      alert('Por favor ingrese un correo electrónico válido');
+    if (!validateForm()) {
       return;
     }
 
@@ -32,12 +79,10 @@ const ConsultaPlan = () => {
       consulta: formData.consulta
     };
 
-    console.log(templateParams);
-
     emailjs.send(serviceID, templateID, templateParams, userID)
       .then((response) => {
         console.log('Correo enviado correctamente!', response.status, response.text);
-        alert('Consulta enviada correctamente');
+        enqueueSnackbar('Consulta enviada correctamente', { variant: 'success' });
         setFormData({
           nombreCompleto: '',
           mascota: '',
@@ -49,7 +94,7 @@ const ConsultaPlan = () => {
       })
       .catch((error) => {
         console.error('Error al enviar el correo:', error);
-        alert('Hubo un error al enviar la consulta. Por favor intenta nuevamente más tarde.');
+        enqueueSnackbar('Error al enviar la consulta. Por favor intenta nuevamente más tarde.', { variant: 'error' });
       });
   };
 
@@ -70,13 +115,13 @@ const ConsultaPlan = () => {
               name="plan"
               value={formData.plan}
               onChange={handleChange}
-              required
             >
               <option value="">Seleccionar Plan</option>
               <option value="primeros-pasos">Primeros Pasos</option>
               <option value="madurando">Madurando</option>
               <option value="adultos">Adultos</option>
             </select>
+            {errors.plan && <p className="error">{errors.plan}</p>}
 
             <label htmlFor="mascota" className="labelContacto">
               Tipo de mascota
@@ -88,10 +133,10 @@ const ConsultaPlan = () => {
               value={formData.mascota}
               onChange={handleChange}
               placeholder="Ej. Gato, Perro, Otro"
-              minLength="4"
+              minLength="3"
               maxLength="32"
-              required
             />
+            {errors.mascota && <p className="error">{errors.mascota}</p>}
 
             <input
               className="inputContacto"
@@ -102,8 +147,8 @@ const ConsultaPlan = () => {
               placeholder="Ingrese su nombre completo"
               minLength="4"
               maxLength="32"
-              required
             />
+            {errors.nombreCompleto && <p className="error">{errors.nombreCompleto}</p>}
 
             <input
               className="inputContacto"
@@ -114,8 +159,8 @@ const ConsultaPlan = () => {
               placeholder="Ingrese su correo electrónico"
               minLength="10"
               maxLength="50"
-              required
             />
+            {errors.correo && <p className="error">{errors.correo}</p>}
 
             <input
               className="inputContacto"
@@ -124,11 +169,11 @@ const ConsultaPlan = () => {
               value={formData.tel}
               onChange={handleChange}
               placeholder="Ingrese su número de teléfono"
-              minLength="12"
+              minLength="8"
               maxLength="20"
               pattern="^\+\d{1,4}\d{1,10}$"
-              required
             />
+            {errors.tel && <p className="error">{errors.tel}</p>}
 
             <textarea
               className="inputContacto-consulta"
@@ -138,8 +183,8 @@ const ConsultaPlan = () => {
               placeholder="Escriba su consulta"
               minLength="10"
               maxLength="350"
-              required
             ></textarea>
+            {errors.consulta && <p className="error">{errors.consulta}</p>}
 
             <button type="submit" className="btnContacto btn-outline-primary btn">
               Enviar

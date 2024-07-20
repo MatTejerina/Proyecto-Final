@@ -16,7 +16,6 @@ function AppointmentsPage() {
     setShowAlert(true);
     setShowModal(false);
 
-    // Restablecer el estado después de un breve tiempo para permitir la actualización
     setTimeout(() => {
       setAppointmentsUpdated(false);
     }, 500);
